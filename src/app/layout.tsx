@@ -22,7 +22,9 @@ export const metadata: Metadata = {
     template: "%s | Metal Ministry Inc."
   },
   description: "ISO 9001:2015 Certified Manufacturer & Exporter of Stainless Steel Pipes, Fittings, Flanges, and High Nickel Alloys. Global Shipping Available.",
-  keywords: ["Stainless Steel Pipes", "Pipe Fittings", "Flanges", "Nickel Alloys", "Metal Manufacturer India", "Metal Exporter"],
+  keywords: ["Stainless Steel Pipes", "Pipe Fittings", "Flanges", "Nickel Alloys", "Metal Manufacturer India", "Metal Exporter", "stainless steel pipe 316 electropolished","5mm aluminum sheets", "gasless flux core wire in bahrain supplier", "4d elbow dimensions", "cupro nickel pipe nipples",
+  "flanges", "flanges types", "pipe flange types", "304 stainless steel round bar", "ss 316 pipe", "stainless steel round bar manufacturer in india", "flanged", "pipe flanges", "conflat flanges", "flange"
+  ],
   openGraph: {
     type: 'website',
     locale: 'en_US',

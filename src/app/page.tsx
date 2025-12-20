@@ -7,75 +7,84 @@ import { ArrowRight, Globe, ShieldCheck, Users, Clock } from 'lucide-react';
 
 const PRODUCTS = [
   {
-    title: "Lap Joint Flanges",
-    desc: "ANSI B16.5, Class 150-2500",
-    image: "/images/lap-joint-flanges.jpg",
-    link: "/products/stainless-steel-nickel-alloy-duplex-steel-lap-joint-flanges-manufacturer"
+    title: "Stainless Steel Pipes",
+    desc: "Premium Seamless & Welded Pipes in 304, 316, 904L grades. Engineered for high pressure and durability.",
+    image: "/images/Stainless-Steel-Pipes.jpg",
+    link: "/products/stainless-steel-316-316l-seamless-welded-erw-pipes-tubes-exporter",
+    size: "large" // 2x2
   },
   {
     title: "Butt Welded Fittings",
     desc: "Elbow, Tee, Reducer, Cap, Stub Ends",
     image: "/images/butt-weld-pipe-fittings.jpg",
-    link: "/products/stainless-steel-buttweld-fittings-manufacturer"
+    link: "/products/stainless-steel-buttweld-fittings-manufacturer",
+    size: "tall" // 1x2
+  },
+  {
+    title: "Lap Joint Flanges",
+    desc: "ANSI B16.5, Class 150-2500",
+    image: "/images/lap-joint-flanges.jpg",
+    link: "/products/stainless-steel-nickel-alloy-duplex-steel-lap-joint-flanges-manufacturer",
+    size: "standard"
   },
   {
     title: "Cupro Nickel Fitting",
     desc: "Cu-Ni 90/10 & 70/30",
     image: "/images/cupro-nickel-fitting.jpg",
-    link: "/products/cupro-nickel-pipe-fittings-manufacturer"
+    link: "/products/cupro-nickel-pipe-fittings-manufacturer",
+    size: "standard"
   },
   {
     title: "Copper Pipes",
     desc: "Cupro-Nickel, SMO 254",
     image: "/images/copper_nickel_cuni.jpg",
-    link: "/products/copper-nickel-pipes-tubes-manufacturer"
-  },
-  {
-    title: "Plate Flanges",
-    desc: "Custom Sizes Available",
-    image: "/images/plate_flange.jpg",
-    link: "/products/stainless-steel-nickel-alloy-duplex-steel-plate-flanges-manufacturer"
+    link: "/products/copper-nickel-pipes-tubes-manufacturer",
+    size: "wide" // 2x1
   },
   {
     title: "Titanium Pipe Fitting",
     desc: "Grade 1, 2, 5, 7, 9, 12",
     image: "/images/titanium-pipe-fittings.jpg",
-    link: "/products/titanium-pipe-fittings-manufacturer"
+    link: "/products/titanium-pipe-fittings-manufacturer",
+    size: "standard"
+  },
+  {
+    title: "Plate Flanges",
+    desc: "Custom Sizes Available",
+    image: "/images/plate_flange.jpg",
+    link: "/products/stainless-steel-nickel-alloy-duplex-steel-plate-flanges-manufacturer",
+    size: "standard"
   },
   {
     title: "Forged Fittings",
     desc: "Socket Weld, Threaded, Outlets",
     image: "/images/forged-fittings.jpg",
-    link: "/products/stainless-steel-forged-fittings-manufacturer"
+    link: "/products/stainless-steel-forged-fittings-manufacturer",
+    size: "wide"
   },
   {
     title: "Blind Flanges",
     desc: "All Schedules & Pressure Ratings",
     image: "/images/blind-flanges.jpg",
-    link: "/products/stainless-steel-nickel-alloy-duplex-steel-blind-flanges-manufacturer"
-  },
-  {
-    title: "Hastelloy Pipe Fitting",
-    desc: "C276, C22, B2, B3",
-    image: "/images/hastelloy-pipe-fittings.jpg",
-    link: "/products/hastelloy-alloy-pipe-fittings-manufacturer"
+    link: "/products/stainless-steel-nickel-alloy-duplex-steel-blind-flanges-manufacturer",
+    size: "standard"
   },
   {
     title: "Threaded Flanges",
     desc: "NPT, BSPT, BSPP",
     image: "/images/threaded-flanges.jpg",
-    link: "/products/stainless-steel-nickel-alloy-duplex-steel-threaded-flanges-manufacturer"
+    link: "/products/stainless-steel-nickel-alloy-duplex-steel-threaded-flanges-manufacturer",
+    size: "standard"
   }
-  // Removed Nickel 200/201 to balance grid (Total reduced to 10 + 1 Big = 11? Wait. If user said 'remove 1', that implies 1 was dangling. If I remove 1, 0 dangling?)
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 font-[var(--font-outfit)]">
       {/* 1. Hero Slider */}
       <HeroSlider />
 
-      {/* 2. Trust Indicators Strip */}
+      {/* 2. Custom Marquee - Trust Indicators Strip */}
       <div className="bg-blue-900 text-white py-12 relative overflow-hidden">
         {/* Abstract Background Pattern */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -143,82 +152,84 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Our Products Grid - Slide Up Effect */}
-      <section className="py-24 bg-white dark:bg-slate-950">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-blue-600 font-bold uppercase tracking-widest text-sm block mb-2">Our Catalog</span>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Precision Engineered Products</h2>
-            <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full" />
+      {/* 4. Our Products Grid - Bento Layout */}
+      <section className="py-32 bg-gray-50 dark:bg-slate-950 relative overflow-hidden">
+        {/* Decorative Blobs */}
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-20">
+            <span className="text-blue-600 font-bold uppercase tracking-widest text-sm block mb-4">Our Catalog</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
+              Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Engineered</span>
+            </h2>
+            <div className="w-32 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-            {/* PREMIER FEATURE: Stainless Steel Pipes */}
-            <div className="group md:col-span-2 rounded-2xl overflow-hidden bg-gray-50 dark:bg-slate-900 relative min-h-[350px] hover:shadow-2xl transition-all duration-500">
-              <div className="absolute inset-0">
-                <Image
-                  src="/images/Stainless-Steel-Pipes.jpg"
-                  alt="Stainless Steel Pipes"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-              </div>
-              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <div className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-4 shadow-lg">BEST SELLER</div>
-                <h3 className="text-3xl font-bold text-white mb-2">Stainless Steel Pipes</h3>
-                <p className="text-gray-300 mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 max-w-md">
-                  Premium Seamless & Welded Pipes in 304, 316, 904L grades. Engineered for high pressure and durability.
-                </p>
-                <Link href="/products/stainless-steel-316-316l-seamless-welded-erw-pipes-tubes-exporter" className="inline-flex items-center bg-white text-blue-900 px-6 py-3 rounded-lg font-bold hover:bg-blue-50 transition-colors shadow-lg">
-                  View Range <ArrowRight size={18} className="ml-2" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Other Products */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[300px] gap-6">
             {PRODUCTS.map((product, idx) => (
-              <div key={idx} className="group relative rounded-xl overflow-hidden bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-500 aspect-[4/5]">
-
-                {/* Image Container */}
-                <div className="absolute inset-0 h-full w-full overflow-hidden">
+              <div
+                key={idx}
+                className={`group relative rounded-3xl overflow-hidden border border-white/20 shadow-xl bg-gray-900 
+                  ${product.size === 'large' ? 'md:col-span-2 md:row-span-2' : ''}
+                  ${product.size === 'wide' ? 'md:col-span-2' : ''}
+                  ${product.size === 'tall' ? 'md:row-span-2' : ''}
+                  hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500
+                `}
+              >
+                {/* Image */}
+                <div className="absolute inset-0 h-full w-full">
                   <Image
                     src={product.image}
                     alt={product.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[10%] group-hover:grayscale-0"
+                    className="object-cover transition-transform duration-1000 scale-100 group-hover:scale-105"
                   />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/40 to-gray-900/90 group-hover:to-gray-900/80 transition-all duration-500" />
                 </div>
 
-                {/* Content Overlay */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="w-10 h-1 bg-blue-500 mb-4 rounded-full w-0 group-hover:w-10 transition-all duration-500 delay-100" />
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full">
+                  <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    {product.size === 'large' && (
+                      <span className="bg-blue-600/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-4 inline-block shadow-lg">
+                        MOST POPULAR
+                      </span>
+                    )}
 
-                  <h3 className="text-xl font-bold text-white mb-2 leading-tight drop-shadow-md">
-                    {product.title}
-                  </h3>
+                    <h3 className={`font-bold text-white mb-3 text-shadow-sm group-hover:text-blue-200 transition-colors
+                      ${product.size === 'large' ? 'text-4xl' : 'text-2xl'}
+                    `}>
+                      {product.title}
+                    </h3>
 
-                  <p className="text-gray-300 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200 line-clamp-2">
-                    {product.desc}
-                  </p>
-
-                  <Link
-                    href={product.link}
-                    className="inline-flex items-center justify-center w-full bg-white/10 backdrop-blur-md border border-white/20 text-white py-3 rounded-lg font-semibold text-sm hover:bg-white hover:text-blue-900 transition-all duration-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 delay-300"
-                  >
-                    View Details
-                  </Link>
+                    <div className={`overflow-hidden transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:max-h-24 max-h-0`}>
+                      <p className="text-gray-300 text-sm mb-6 leading-relaxed">
+                        {product.desc}
+                      </p>
+                      <Link
+                        href={product.link}
+                        className="inline-flex items-center text-sm font-semibold text-white hover:text-blue-400 transition-colors"
+                      >
+                        Explore Product <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Decorative Shine Effect */}
+                <div className="absolute top-0 right-0 -mt-10 -mr-10 w-24 h-24 bg-white/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-16">
-            <Link href="/products" className="inline-block px-10 py-4 bg-gray-900 dark:bg-slate-800 text-white rounded-full hover:bg-blue-600 transition-colors font-bold tracking-wide shadow-xl hover:shadow-blue-600/30">
+          <div className="text-center mt-20">
+            <Link href="/products" className="group inline-flex items-center gap-3 px-10 py-5 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 font-bold tracking-wide shadow-xl hover:shadow-blue-600/30 border border-gray-200 dark:border-slate-700">
               View Complete Catalog
+              <span className="bg-gray-100 dark:bg-slate-700 group-hover:bg-white/20 text-blue-600 group-hover:text-white rounded-full p-1 transition-colors">
+                <ArrowRight size={16} />
+              </span>
             </Link>
           </div>
         </div>
