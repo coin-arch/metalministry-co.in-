@@ -9,33 +9,33 @@ import Image from 'next/image';
 const SLIDES = [
     {
         id: 1,
-        // Generated HD: Industrial Plant
-        image: '/images/slider-hd-1.png',
-        subtitle: 'Metal Ministry Inc.',
-        title: 'One Stop For All Your Metal & Material Needs',
-        description: 'Leading Manufacturer & Exporter of Ferrous & Non Ferrous Metals, serving clients globally with quality and trust.',
+        // Legacy Slider 1
+        image: '/images/legacy-slider/slider-1.jpg',
+        subtitle: 'Forged Fittings Manufacturer',
+        title: 'Precision Threaded & Socket Weld Fittings',
+        description: 'ISO 9001:2015 Certified. Specialized in High Pressure Fittings for Oil, Gas, and Petrochemical Industries.',
         cta: 'Contact Us',
         link: '/contact-us'
     },
     {
         id: 2,
-        // Generated HD: Stainless Steel
-        image: '/images/slider-hd-2.png',
-        subtitle: 'Specialized Manufacturing',
-        title: 'Leading Manufacturer of Stainless Steel',
-        description: 'Premium quality 316, 317, 904L, 321H Stainless Steel Pipes, Tubes, and Fittings.',
-        cta: 'View Stainless Steel',
-        link: '/products/stainless-steel-316-316l-seamless-welded-erw-pipes-tubes-exporter'
+        // Legacy Slider 2
+        image: '/images/legacy-slider/slider-2.jpg',
+        subtitle: 'Material Excellence',
+        title: 'Stainless Steel & Carbon Steel',
+        description: 'Premium quality 304/L, 316/L, A105, A350 LF2 Forged Fittings designed for extreme durability.',
+        cta: 'View Forged Fittings',
+        link: '/products/stainless-steel-threaded-forged-fittings-manufacturer'
     },
     {
         id: 3,
-        // Generated HD: Copper/Nickel
-        image: '/images/slider-hd-3.png',
-        subtitle: 'Global Exporter',
-        title: 'Copper & Nickel Alloy Specialists',
-        description: 'Expertise in Copper, Cupro-Nickel, and High Nickel Alloy fittings and flanges.',
-        cta: 'View Copper Products',
-        link: '/products/copper-nickel-pipes-tubes-manufacturer'
+        // Legacy Slider 3
+        image: '/images/legacy-slider/slider-3.jpg',
+        subtitle: 'Exotic Alloys',
+        title: 'Nickel & Titanium Alloys',
+        description: 'Expertise in Monel, Inconel, Hastelloy, and Titanium fittings for specialized applications.',
+        cta: 'View Exotic Alloys',
+        link: '/products/high-nickel-alloy-threaded-forged-fittings-manufacturer'
     }
 ];
 
@@ -190,4 +190,3 @@ export default function HeroSlider() {
         </section>
     );
 }
-

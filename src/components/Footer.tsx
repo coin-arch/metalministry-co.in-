@@ -1,110 +1,129 @@
+'use client';
+
 import Link from 'next/link';
-import { Mail, MapPin, Phone, Linkedin, Facebook, Twitter, Instagram, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, Phone, Linkedin, Facebook, Twitter, Instagram } from 'lucide-react';
+
+const FooterLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+    <Link
+        href={href}
+        className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"
+    >
+        <span className="w-1 h-1 bg-blue-600 rounded-full" />
+        {children}
+    </Link>
+);
+
+const SocialLink = ({ icon, href }: { icon: React.ReactNode; href: string }) => (
+    <a
+        href={href}
+        className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition-all text-white hover:-translate-y-1 block"
+    >
+        {icon}
+    </a>
+);
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-950 text-gray-300 pt-20 border-t border-gray-900">
-            {/* Main Footer Content */}
-            <div className="container mx-auto px-4 pb-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
-
+        <footer className="bg-gray-950 pt-20 pb-10 border-t border-gray-900 mt-20">
+            <div className="container mx-auto px-4">
+                <div className="grid md:grid-cols-4 gap-12 mb-16">
                     {/* Brand Column */}
-                    <div className="lg:col-span-4 space-y-6">
-                        <Link href="/" className="inline-block">
+                    <div className="space-y-6">
+                        <Link href="/" className="block">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                src="/images/logo1.png"
-                                alt="Metal Ministry Inc."
-                                className="h-16 w-auto brightness-0 invert"
+                                src="/images/logo.png"
+                                alt="Forged Fittings Manufacturer"
+                                className="h-20 w-auto brightness-0 invert opacity-90"
                             />
                         </Link>
-                        <p className="text-gray-400 leading-relaxed text-sm">
-                            Metal Ministry Inc. is a premier ISO 9001:2015 certified manufacturer & exporter of ferrous & non-ferrous metal products. We are committed to precision, quality, and global excellence.
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                            ISO 9001:2015 Certified Manufacturer & Exporter of High-Pressure Forged Fittings.
+                            Specializing in Stainless Steel, Carbon Steel, and High Nickel Alloys.
                         </p>
-                        <div className="flex gap-4 pt-2">
-                            <a href="#" className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition-all text-white hover:-translate-y-1"><Linkedin size={18} /></a>
-                            <a href="#" className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition-all text-white hover:-translate-y-1"><Facebook size={18} /></a>
-                            <a href="#" className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition-all text-white hover:-translate-y-1"><Twitter size={18} /></a>
-                            <a href="#" className="p-2 bg-gray-800 rounded-full hover:bg-blue-600 transition-all text-white hover:-translate-y-1"><Instagram size={18} /></a>
+                        <div className="flex gap-4">
+                            <SocialLink icon={<Facebook size={18} />} href="#" />
+                            <SocialLink icon={<Twitter size={18} />} href="#" />
+                            <SocialLink icon={<Linkedin size={18} />} href="#" />
+                            <SocialLink icon={<Instagram size={18} />} href="#" />
                         </div>
                     </div>
 
-                    {/* Quick Link 1 */}
-                    <div className="lg:col-span-2 md:col-span-1">
-                        <h4 className="text-white font-bold text-base mb-6 uppercase tracking-wider">Company</h4>
-                        <ul className="space-y-4 text-sm">
-                            <li><Link href="/" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> Home</Link></li>
-                            <li><Link href="/about-us" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> About Us</Link></li>
-                            <li><Link href="/products/quality" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> Quality Policy</Link></li>
-                            <li><Link href="/blogs" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> Latest News</Link></li>
-                            <li><Link href="/contact-us" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> Contact Us</Link></li>
+                    {/* Quick Links */}
+                    <div>
+                        <h4 className="text-white font-bold text-lg mb-6">Quick Links</h4>
+                        <ul className="space-y-4">
+                            <li><FooterLink href="/">Home</FooterLink></li>
+                            <li><FooterLink href="/about-us">About Company</FooterLink></li>
+                            <li><FooterLink href="/quality">Quality Policy</FooterLink></li>
+                            <li><FooterLink href="/certificates">Certificates</FooterLink></li>
+                            <li><FooterLink href="/blogs">Industry Blog</FooterLink></li>
+                            <li><FooterLink href="/contact-us">Contact Us</FooterLink></li>
                         </ul>
                     </div>
 
-                    {/* Quick Link 2 - Products */}
-                    <div className="lg:col-span-3 md:col-span-1">
-                        <h4 className="text-white font-bold text-base mb-6 uppercase tracking-wider">Key Products</h4>
-                        <ul className="space-y-4 text-sm">
-                            <li><Link href="/products/stainless-steel-316-316l-seamless-welded-erw-pipes-tubes-exporter" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> Stainless Steel Pipes</Link></li>
-                            <li><Link href="/products/high-nickel-alloy-seamless-welded-pipes-tubes-exporter" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> Nickel Alloys</Link></li>
-                            <li><Link href="/products/stainless-steel-buttweld-fittings-manufacturer" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> Buttweld Fittings</Link></li>
-                            <li><Link href="/products/stainless-steel-347-347h-weldneck-flanges-manufacturer-supplier" className="hover:text-blue-500 transition-colors flex items-center gap-2"><div className="w-1 h-1 bg-blue-600 rounded-full" /> Flanges</Link></li>
-                            <li><Link href="/products" className="text-blue-400 font-semibold hover:text-white transition-colors flex items-center gap-2 mt-4">View All Products <ArrowRight size={14} /></Link></li>
+                    {/* Core Products */}
+                    <div>
+                        <h4 className="text-white font-bold text-lg mb-6">Forged Fittings</h4>
+                        <ul className="space-y-4">
+                            <li><FooterLink href="/products/stainless-steel-threaded-forged-fittings-manufacturer">Stainless Steel Threaded</FooterLink></li>
+                            <li><FooterLink href="/products/carbon-steel-threaded-forged-fittings-manufacturer">Carbon Steel Threaded</FooterLink></li>
+                            <li><FooterLink href="/products/alloy-steel-threaded-forged-fittings-manufacturer">Alloy Steel Threaded</FooterLink></li>
+                            <li><FooterLink href="/products/stainless-steel-socket-weld-forged-fittings-manufacturer">Stainless Socket Weld</FooterLink></li>
+                            <li><FooterLink href="/products/carbon-steel-socket-weld-forged-fittings-manufacturer">Carbon Socket Weld</FooterLink></li>
+                            <li><FooterLink href="/products/alloy-steel-socket-weld-forged-fittings-manufacturer">Alloy Socket Weld</FooterLink></li>
                         </ul>
                     </div>
 
                     {/* Contact Info */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-white font-bold text-base mb-6 uppercase tracking-wider">Get in Touch</h4>
-                        <div className="space-y-6 text-sm">
-                            <div className="flex gap-4 group">
-                                <div className="p-3 bg-blue-900/20 text-blue-500 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <div>
+                        <h4 className="text-white font-bold text-lg mb-6">Contact Us</h4>
+                        <ul className="space-y-6">
+                            <li className="flex gap-4">
+                                <div className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center shrink-0 text-blue-400">
                                     <MapPin size={20} />
                                 </div>
-                                <div className="flex-1">
-                                    <h6 className="text-white font-bold mb-1">Head Office</h6>
-                                    <p className="text-gray-400 leading-relaxed group-hover:text-gray-200 transition-colors">
-                                        Metal Ministry Inc.<br />
-                                        Mumbai, Maharashtra, India
+                                <div>
+                                    <h5 className="text-white font-medium mb-1">Head Office</h5>
+                                    <p className="text-gray-400 text-sm">
+                                        Prasad Chambers, Tata Rd No 2, <br />
+                                        Charni Road East, Opera House,<br />
+                                        Girgaon, Mumbai - 400004
                                     </p>
                                 </div>
-                            </div>
-
-                            <div className="flex gap-4 group">
-                                <div className="p-3 bg-blue-900/20 text-blue-500 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-all">
+                            </li>
+                            <li className="flex gap-4">
+                                <div className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center shrink-0 text-blue-400">
                                     <Phone size={20} />
                                 </div>
-                                <div className="flex-1">
-                                    <h6 className="text-white font-bold mb-1">Phone Support</h6>
-                                    <a href="tel:+919892171042" className="block text-gray-400 hover:text-white transition-colors">+91-9892171042</a>
+                                <div>
+                                    <h5 className="text-white font-medium mb-1">Phone</h5>
+                                    <a href="tel:+919892171042" className="text-gray-400 text-sm hover:text-white transition-colors block">+91-9892171042</a>
                                 </div>
-                            </div>
-
-                            <div className="flex gap-4 group">
-                                <div className="p-3 bg-blue-900/20 text-blue-500 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-all">
+                            </li>
+                            <li className="flex gap-4">
+                                <div className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center shrink-0 text-blue-400">
                                     <Mail size={20} />
                                 </div>
-                                <div className="flex-1">
-                                    <h6 className="text-white font-bold mb-1">Email Us</h6>
-                                    <a href="mailto:enquiry@metalministry.in" className="block text-gray-400 hover:text-white transition-colors">enquiry@metalministry.in</a>
+                                <div>
+                                    <h5 className="text-white font-medium mb-1">Email</h5>
+                                    <a href="mailto:enquiry@metalministry.in" className="text-gray-400 text-sm hover:text-white transition-colors block">enquiry@metalministry.in</a>
+                                    <a href="mailto:info@metalministry.in" className="text-gray-400 text-sm hover:text-white transition-colors block">info@metalministry.in</a>
                                 </div>
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
-
                 </div>
-            </div>
 
-            {/* Bottom Bar */}
-            <div className="bg-black py-6 border-t border-gray-900">
-                <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-                    <div>
-                        &copy; {new Date().getFullYear()} Metal Ministry Inc. All Rights Reserved.
-                    </div>
-                    <div className="flex gap-8">
+                {/* Bottom Bar */}
+                <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-gray-500 text-sm">
+                        © {new Date().getFullYear()} Metal Ministry Inc. All rights reserved.
+                    </p>
+                    <div className="flex gap-8 text-sm text-gray-500">
                         <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
                         <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-                        <Link href="/sitemap" className="hover:text-white transition-colors">Sitemap</Link>
+                        <Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link>
                     </div>
                 </div>
             </div>

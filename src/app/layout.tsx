@@ -16,21 +16,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://metalministry.in'),
+  metadataBase: new URL('https://forged-fitting.com'),
   title: {
-    default: "Metal Ministry Inc. | Certified Manufacturer & Exporter",
+    default: "Forged Fittings Manufacturer | Metal Ministry Inc.",
     template: "%s | Metal Ministry Inc."
   },
-  description: "ISO 9001:2015 Certified Manufacturer & Exporter of Stainless Steel Pipes, Fittings, Flanges, and High Nickel Alloys. Global Shipping Available.",
-  keywords: ["Stainless Steel Pipes", "Pipe Fittings", "Flanges", "Nickel Alloys", "Metal Manufacturer India", "Metal Exporter", "stainless steel pipe 316 electropolished", "5mm aluminum sheets", "gasless flux core wire in bahrain supplier", "4d elbow dimensions", "cupro nickel pipe nipples",
-    "flanges", "flanges types", "pipe flange types", "304 stainless steel round bar", "ss 316 pipe", "stainless steel round bar manufacturer in india", "flanged", "pipe flanges", "conflat flanges", "flange"
-  ],
+  description: "ISO 9001:2015 Certified Manufacturer & Exporter of Threaded & Socket Weld Forged Fittings. Stainless Steel, Carbon Steel, Alloy Steel, and High Nickel Alloys.",
+  keywords: ["Forged Fittings", "Socket Weld Fittings", "Threaded Fittings", "Stainless Steel Fittings", "Metal Ministry Inc", "Pipe Fittings Manufacturer", "ASME B16.11"],
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://metalministry.in',
-    title: "Metal Ministry Inc.",
-    description: "Your trusted partner for premium metal products. Certified Manufacturer & Exporter.",
+    url: 'https://forged-fitting.com',
+    title: "Forged Fittings Manufacturer | Metal Ministry Inc.",
+    description: "Your trusted partner for premium forged fittings. Certified Manufacturer & Exporter.",
     siteName: "Metal Ministry Inc.",
   },
   twitter: {

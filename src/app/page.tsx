@@ -3,78 +3,67 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import HeroSlider from '@/components/HeroSlider';
+import Marquee from '@/components/Marquee';
 import { ArrowRight, Globe, ShieldCheck, Users, Clock } from 'lucide-react';
+
+import { getImageForProduct } from '@/lib/image-mapper';
 
 const PRODUCTS = [
   {
-    title: "Stainless Steel Pipes",
-    desc: "Premium Seamless & Welded Pipes in 304, 316, 904L grades. Engineered for high pressure and durability.",
-    image: "/images/Stainless-Steel-Pipes.jpg",
-    link: "/products/stainless-steel-316-316l-seamless-welded-erw-pipes-tubes-exporter",
+    title: "Stainless Steel Threaded",
+    desc: "304, 304L, 316, 316L. High Pressure 2000lb, 3000lb, 6000lb.",
+    slug: "stainless-steel-threaded-forged-fittings-manufacturer",
+    link: "/products/stainless-steel-threaded-forged-fittings-manufacturer",
     size: "large" // 2x2
   },
   {
-    title: "Butt Welded Fittings",
-    desc: "Elbow, Tee, Reducer, Cap, Stub Ends",
-    image: "/images/butt-weld-pipe-fittings.jpg",
-    link: "/products/stainless-steel-buttweld-fittings-manufacturer",
+    title: "Carbon Steel Threaded",
+    desc: "A105, A105N, LF2. For High Temperature Service.",
+    slug: "carbon-steel-threaded-forged-fittings-manufacturer",
+    link: "/products/carbon-steel-threaded-forged-fittings-manufacturer",
     size: "tall" // 1x2
   },
   {
-    title: "Lap Joint Flanges",
-    desc: "ANSI B16.5, Class 150-2500",
-    image: "/images/lap-joint-flanges.jpg",
-    link: "/products/stainless-steel-nickel-alloy-duplex-steel-lap-joint-flanges-manufacturer",
+    title: "Socket Weld Fittings",
+    desc: "ASME B16.11 Forged Steel Fittings.",
+    slug: "stainless-steel-socket-weld-fittings-manufacturer",
+    link: "/products/stainless-steel-socket-weld-fittings-manufacturer",
     size: "standard"
   },
   {
-    title: "Cupro Nickel Fitting",
-    desc: "Cu-Ni 90/10 & 70/30",
-    image: "/images/cupro-nickel-fitting.jpg",
-    link: "/products/cupro-nickel-pipe-fittings-manufacturer",
+    title: "Alloy Steel Fittings",
+    desc: "F1, F5, F9, F11, F22, F91. Chrome Moly Fittings.",
+    slug: "alloy-steel-threaded-forged-fittings-manufacturer",
+    link: "/products/alloy-steel-threaded-forged-fittings-manufacturer",
     size: "standard"
   },
   {
-    title: "Copper Pipes",
-    desc: "Cupro-Nickel, SMO 254",
-    image: "/images/copper_nickel_cuni.jpg",
-    link: "/products/copper-nickel-pipes-tubes-manufacturer",
+    title: "Duplex Steel Fittings",
+    desc: "UNS S31803, S32205. High Strength & Corrosion Resistance.",
+    slug: "duplex-steel-s31803-s32205-threaded-forged-fittings-manufacturer",
+    link: "/products/duplex-steel-s31803-s32205-threaded-forged-fittings-manufacturer",
     size: "wide" // 2x1
   },
   {
-    title: "Titanium Pipe Fitting",
-    desc: "Grade 1, 2, 5, 7, 9, 12",
-    image: "/images/titanium-pipe-fittings.jpg",
-    link: "/products/titanium-pipe-fittings-manufacturer",
-    size: "standard"
-  },
-  {
-    title: "Plate Flanges",
-    desc: "Custom Sizes Available",
-    image: "/images/plate_flange.jpg",
-    link: "/products/stainless-steel-nickel-alloy-duplex-steel-plate-flanges-manufacturer",
-    size: "standard"
-  },
-  {
-    title: "Forged Fittings",
-    desc: "Socket Weld, Threaded, Outlets",
-    image: "/images/forged-fittings.jpg",
-    link: "/products/stainless-steel-forged-fittings-manufacturer",
+    title: "High Nickel Alloys",
+    desc: "Monel, Inconel, Hastelloy, Nickel 200/201.",
+    slug: "high-nickel-alloy-threaded-forged-fittings-manufacturer",
+    link: "/products/high-nickel-alloy-threaded-forged-fittings-manufacturer",
     size: "wide"
   },
   {
-    title: "Blind Flanges",
-    desc: "All Schedules & Pressure Ratings",
-    image: "/images/blind-flanges.jpg",
-    link: "/products/stainless-steel-nickel-alloy-duplex-steel-blind-flanges-manufacturer",
-    size: "standard"
+    title: "Cupro Nickel Fittings",
+    desc: "Cu-Ni 90/10 & 70/30. Marine Applications.",
+    slug: "cupro-nickel-threaded-forged-fittings-manufacturer",
+    link: "/products/cupro-nickel-threaded-forged-fittings-manufacturer",
+    size: "wide"
   },
   {
-    title: "Threaded Flanges",
-    desc: "NPT, BSPT, BSPP",
-    image: "/images/threaded-flanges.jpg",
-    link: "/products/stainless-steel-nickel-alloy-duplex-steel-threaded-flanges-manufacturer",
-    size: "standard"
+    title: "Titanium Fittings",
+    desc: "Grade 2, Grade 5. Aerospace & Chemical Industries.",
+    slug: "titanium-alloy-threaded-forged-fittings-manufacturer",
+    link: "/products/titanium-alloy-threaded-forged-fittings-manufacturer",
+    size: "wide"
   }
 ];
 
@@ -131,17 +120,15 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Metal Ministry Inc.</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Premium Forged Fittings</h2>
               <div className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed space-y-6">
                 <p>
-                  A Leading Manufacturer & Exporter of Ferrous & Non Ferrous Metals.
-                  Incorporated by <strong className="text-blue-600">Mr. Dinesh Chandan</strong>, we have embarked on a
-                  never-ending journey to satisfy and maintain long-lasting relationships with our global clientele.
+                  Specialized Manufacturer & Exporter of High-Pressure Forged Fittings.
+                  A specialized division of <strong className="text-blue-600">Metal Ministry Inc.</strong>, dedicated to precision engineering.
                 </p>
                 <p>
-                  We are a proactive organisation engaged in supplying quality products that meet and exceed specific requirements.
-                  From <strong className="text-gray-900 dark:text-white">Stainless Steel Pipes</strong> to <strong className="text-gray-900 dark:text-white">High Nickel Alloys</strong>,
-                  we are your trusted partner in precision engineering.
+                  We supply <strong className="text-gray-900 dark:text-white">Socket Weld</strong> and <strong className="text-gray-900 dark:text-white">Threaded Fittings</strong> in
+                  Stainless Steel, Carbon Steel, Alloy Steel, and High Nickel Alloys.
                 </p>
               </div>
               <div className="mt-8">
@@ -181,9 +168,11 @@ export default function Home() {
                 {/* Image */}
                 <div className="absolute inset-0 h-full w-full">
                   <Image
-                    src={product.image}
+                    src={getImageForProduct(product.slug)}
                     alt={product.title}
                     fill
+                    quality={95}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-1000 scale-100 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/40 to-gray-900/90 group-hover:to-gray-900/80 transition-all duration-500" />
@@ -235,12 +224,73 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Contact CTA - Enhanced Redesign */}
+
+      {/* 5. Certifications Marquee */}
+      <section className="py-20 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800">
+        <div className="container mx-auto px-4 mb-12 text-center">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Trusted Certifications</h2>
+          <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full" />
+        </div>
+        <Marquee speed={15}>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+            <div key={num} className="relative w-32 h-24 hover:scale-110 transition-transform duration-300">
+              <Image
+                src={`/images/partner0${num}.png`}
+                alt={`Certification ${num}`}
+                fill
+                className="object-contain"
+              />
+            </div>
+          ))}
+        </Marquee>
+      </section>
+
+      {/* 6. Industries & Applications Floating Cards */}
+      <section className="py-24 bg-gray-50 dark:bg-slate-950 overflow-hidden relative">
+        <div className="container mx-auto px-4 mb-12 text-center relative z-10">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Industries We Serve</h2>
+          <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full" />
+        </div>
+
+        <div className="relative rotate-[-2deg] scale-110">
+          <Marquee speed={20} direction="right" pauseOnHover={true}>
+            {[
+              { img: 'oil-gas-industry.jpg', title: 'Oil & Gas' },
+              { img: 'chemical-industry.jpg', title: 'Chemical' },
+              { img: 'pharmaceutical-industry.jpg', title: 'Pharma' },
+              { img: 'railway-sector.jpg', title: 'Railways' },
+              { img: 'automobile-industry.jpg', title: 'Automobile' },
+              { img: 'energy-sector.jpg', title: 'Energy' },
+              { img: 'food-dairy-industry.jpg', title: 'Food & Dairy' },
+            ].map((item, idx) => (
+              <div key={idx} className="relative w-80 h-52 shrink-0 rounded-2xl overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 group">
+                <div className="absolute inset-0">
+                  <Image
+                    src={`/images/${item.img}`}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                </div>
+                <div className="absolute bottom-0 left-0 p-6">
+                  <h4 className="text-white text-xl font-bold translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    {item.title}
+                  </h4>
+                </div>
+              </div>
+            ))}
+          </Marquee>
+        </div>
+      </section>
+
+      {/* 7. Contact CTA - Enhanced Redesign */}
       <section className="py-28 relative overflow-hidden">
+
         {/* Deep Industrial Background */}
         <div className="absolute inset-0 p-0 m-0">
           <Image
-            src="/images/slider-hd-1.png"
+            src="/images/slider-1.jpg"
             alt="Background"
             fill
             className="object-cover blur-[2px] brightness-[0.2]"
@@ -300,9 +350,9 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Metal Ministry Inc.",
-            "url": "https://metalministry.in",
-            "logo": "https://metalministry.in/images/logo1.png",
+            "name": "Forged Fittings (Metal Ministry Inc.)",
+            "url": "https://forged-fitting.com",
+            "logo": "https://forged-fitting.com/images/logo1.png",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+91-9892171042",

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, Search } from 'lucide-react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { imageMap } from '@/lib/imageMap';
+import { getImageForProduct } from '@/lib/image-mapper';
 
 type Product = {
     title: string;
@@ -13,26 +13,14 @@ type Product = {
     meta_description: string;
 };
 
-// Helper function repeated here or imported if utility exists (keeping self-contained for component)
-function findBestImage(slug: string): string | null {
-    if (!slug) return null;
-    let match = imageMap.find(img => img.toLowerCase().startsWith(slug.toLowerCase()));
-    if (!match) {
-        const cleanSlug = slug.replace(/-manufacturer|-exporter|-supplier/g, '');
-        match = imageMap.find(img => img.toLowerCase().includes(cleanSlug.toLowerCase()));
-    }
-    if (!match) {
-        match = imageMap.find(img => slug.includes(img.replace(/\.(jpg|png|jpeg)/, '').toLowerCase()));
-    }
-    return match ? `/images/${match}` : null;
-}
-
 export default function ProductCatalog({ products }: { products: Product[] }) {
     const [query, setQuery] = useState('');
 
     const filteredProducts = products.filter(p =>
-        p.title.toLowerCase().includes(query.toLowerCase()) ||
-        p.meta_description?.toLowerCase().includes(query.toLowerCase())
+        p.slug !== 'about-us' && // Explicit client-side filter
+        !p.title.toLowerCase().includes('pipes') &&
+        (p.title.toLowerCase().includes(query.toLowerCase()) ||
+            p.meta_description?.toLowerCase().includes(query.toLowerCase()))
     );
 
     return (
@@ -56,7 +44,6 @@ export default function ProductCatalog({ products }: { products: Product[] }) {
             >
                 <AnimatePresence>
                     {filteredProducts.map((product) => {
-                        const imagePath = findBestImage(product.slug);
                         return (
                             <motion.div
                                 layout
@@ -68,34 +55,37 @@ export default function ProductCatalog({ products }: { products: Product[] }) {
                             >
                                 <Link
                                     href={`/products/${product.slug}`}
-                                    className="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-800 flex flex-col h-full"
+                                    className="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300 border border-gray-100 dark:border-slate-800 flex flex-col h-full"
                                 >
-                                    <div className="relative h-48 overflow-hidden bg-gray-200">
-                                        {imagePath ? (
-                                            <Image
-                                                src={imagePath}
-                                                alt={product.title}
-                                                fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                            />
-                                        ) : (
-                                            <div className="flex items-center justify-center h-full text-gray-400">
-                                                No Image
-                                            </div>
-                                        )}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    <div className="relative h-64 overflow-hidden bg-gray-100 dark:bg-slate-800">
+                                        <Image
+                                            src={getImageForProduct(product.slug)}
+                                            alt={product.title}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+
+                                        {/* Floating Action / Badge */}
+                                        <div className="absolute top-4 right-4 bg-white/90 dark:bg-slate-950/90 backdrop-blur-sm p-2 rounded-full shadow-lg translate-x-12 group-hover:translate-x-0 transition-transform duration-300">
+                                            <ArrowRight size={18} className="text-blue-600" />
+                                        </div>
                                     </div>
 
-                                    <div className="p-6 flex-grow flex flex-col">
-                                        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 transition-colors">
+                                    <div className="p-6 flex-grow flex flex-col relative">
+                                        {/* Decorative Line */}
+                                        <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-700 to-transparent group-hover:via-blue-500 transition-colors duration-500" />
+
+                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                                             {product.title}
                                         </h3>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-3 mb-4 flex-grow">
-                                            {product.meta_description || 'Premium quality metal products.'}
+                                        <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-3 mb-6 flex-grow font-light leading-relaxed">
+                                            {product.meta_description || 'Premium quality forged fittings manufactured to international standards.'}
                                         </p>
-                                        <span className="inline-flex items-center text-blue-600 font-semibold text-sm group-hover:underline">
-                                            View Details <ArrowRight size={16} className="ml-1" />
-                                        </span>
+
+                                        <div className="flex items-center text-blue-600 font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
+                                            View Specifications <ArrowRight size={16} className="ml-1" />
+                                        </div>
                                     </div>
                                 </Link>
                             </motion.div>

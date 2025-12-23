@@ -24,16 +24,8 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Logic: 
-    // Home Page: Transparent at top -> Solid on scroll. Fixed position (overlay).
-    // Other Pages: Always Solid. Sticky position (normal flow).
-
     const isTransparent = isHomePage && !isScrolled;
-
-    // Text color: White if transparent, Gray/Black if solid
     const textColorClass = isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-blue-600';
-
-    // Logo: Invert brightness if transparent (to make it white), else normal
     const logoClass = isTransparent ? 'brightness-0 invert drop-shadow-md' : '';
 
     return (
@@ -52,10 +44,7 @@ export default function Header() {
                             <span><Mail size={12} className="inline mr-1" /> enquiry@metalministry.in</span>
                             <span><Phone size={12} className="inline mr-1" /> +91-9892171042</span>
                             <span>Global Shipping Available</span>
-                            {/* //adding extra space to avoid overflow */}
                             <span> </span>
-                            <span> </span>
-                            {/* Duplicate for seamless loop */}
                             <span>ISO 9001:2015 Certified Manufacturer & Exporter</span>
                             <span><Mail size={12} className="inline mr-1" /> enquiry@metalministry.in</span>
                             <span><Phone size={12} className="inline mr-1" /> +91-9892171042</span>
@@ -71,88 +60,56 @@ export default function Header() {
                     <Link href="/" className="flex-shrink-0 relative group z-50">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/images/logo1.png"
+                            src="/images/logo.png"
                             alt="Metal Ministry Inc. Logo"
                             className={`h-16 md:h-20 w-auto object-contain transition-all duration-500 ${logoClass}`}
                         />
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex gap-10 items-center">
+                    <nav className="hidden lg:flex gap-8 items-center">
                         <Link href="/" className={`${textColorClass} font-bold tracking-wide text-sm uppercase transition-colors relative group py-2`}>
                             Home
                             <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full`}></span>
                         </Link>
+                        <Link href="/about-us" className={`${textColorClass} font-bold tracking-wide text-sm uppercase transition-colors relative group py-2`}>
+                            About
+                            <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full`}></span>
+                        </Link>
 
-                        {/* Mega Menu: About */}
+                        {/* Threaded Fittings Dropdown */}
                         <div
                             className="relative group h-full"
-                            onMouseEnter={() => handleMouseEnter('about')}
+                            onMouseEnter={() => handleMouseEnter('threaded')}
                             onMouseLeave={handleMouseLeave}
                         >
                             <button className={`flex items-center gap-1 ${textColorClass} font-bold tracking-wide text-sm uppercase py-4 group`}>
-                                About Us <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === 'about' ? 'rotate-180' : ''}`} />
+                                Threaded Fittings <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === 'threaded' ? 'rotate-180' : ''}`} />
                             </button>
                             <AnimatePresence>
-                                {activeDropdown === 'about' && (
+                                {activeDropdown === 'threaded' && (
                                     <motion.div
                                         initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
                                         animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                                         exit={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-0 w-56 bg-white/95 backdrop-blur-xl shadow-2xl rounded-lg border border-gray-100 overflow-hidden"
+                                        className="absolute top-full -left-10 w-[600px] bg-white/95 backdrop-blur-xl shadow-2xl rounded-lg border border-gray-100 overflow-hidden grid grid-cols-2 p-6 pb-16 gap-x-8 gap-y-4"
                                     >
-                                        <div className="py-2">
-                                            <Link href="/about-us" className="block px-6 py-3 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Company Profile</Link>
-                                            <Link href="/products/quality" className="block px-6 py-3 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Quality Policy</Link>
-                                            <Link href="/products/technical-data" className="block px-6 py-3 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors">Technical Data</Link>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
+                                        <Link href="/products/stainless-steel-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Stainless Steel</Link>
+                                        <Link href="/products/carbon-steel-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Carbon Steel</Link>
+                                        <Link href="/products/alloy-steel-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Alloy Steel</Link>
+                                        <Link href="/products/duplex-steel-s31803-s32205-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Duplex Steel</Link>
+                                        <Link href="/products/super-duplex-steel-s32750-s32760-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Super Duplex Steel</Link>
+                                        <Link href="/products/nickel-alloy-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Nickel Alloys</Link>
+                                        <Link href="/products/inconel-alloy-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Inconel</Link>
+                                        <Link href="/products/monel-alloy-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Monel</Link>
+                                        <Link href="/products/hastelloy-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Hastelloy</Link>
+                                        <Link href="/products/titanium-alloy-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Titanium</Link>
+                                        <Link href="/products/cupro-nickel-threaded-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Cupro Nickel</Link>
 
-                        {/* Mega Menu: Products */}
-                        <div
-                            className="relative group h-full"
-                            onMouseEnter={() => handleMouseEnter('products')}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            <button className={`flex items-center gap-1 ${textColorClass} font-bold tracking-wide text-sm uppercase py-4`}>
-                                Products <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === 'products' ? 'rotate-180' : ''}`} />
-                            </button>
-                            <AnimatePresence>
-                                {activeDropdown === 'products' && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
-                                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                                        exit={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
-                                        transition={{ duration: 0.2 }}
-                                        className="absolute top-full -left-20 w-[600px] bg-white/95 backdrop-blur-xl shadow-2xl rounded-xl border border-gray-100 overflow-hidden grid grid-cols-2 p-6 gap-6"
-                                    >
-                                        <div>
-                                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 border-b pb-2">By Product Type</h4>
-                                            <ul className="space-y-2">
-                                                <li><Link href="/products/stainless-steel-316-316l-seamless-welded-erw-pipes-tubes-exporter" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Pipes & Tubes</Link></li>
-                                                <li><Link href="/products/stainless-steel-buttweld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Butt Weld Fittings</Link></li>
-                                                <li><Link href="/products/stainless-steel-forged-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Forged Fittings</Link></li>
-                                                <li><Link href="/products/stainless-steel-347-347h-weldneck-flanges-manufacturer-supplier" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Flanges</Link></li>
-                                                <li><Link href="/products" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Fasteners</Link></li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 border-b pb-2">By Material</h4>
-                                            <ul className="space-y-2">
-                                                <li><Link href="/products/stainless-steel-316-316l-seamless-welded-erw-pipes-tubes-exporter" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Stainless Steel Pipes</Link></li>
-                                                <li><Link href="/products/high-nickel-alloy-seamless-welded-pipes-tubes-exporter" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">High Nickel Alloys</Link></li>
-                                                <li><Link href="/products/duplex-steel-uns-s31803-pipe-fitting-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Duplex Steel</Link></li>
-                                                <li><Link href="/products/super-duplex-uns-s32750-pipe-fitting-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Super Duplex</Link></li>
-                                                <li><Link href="/products/copper-nickel-pipes-tubes-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Cupro Nickel</Link></li>
-                                                <li><Link href="/products/titanium-pipe-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Titanium</Link></li>
-                                            </ul>
-                                        </div>
-                                        <div className="col-span-2 mt-4 pt-4 border-t border-gray-100 text-center">
-                                            <Link href="/products" className="text-blue-600 font-bold text-sm hover:underline flex items-center justify-center gap-1">
+                                        {/* Footer Link */}
+                                        <div className="absolute bottom-0 left-0 w-full bg-gray-50 border-t border-gray-100 p-3 text-center">
+                                            <Link href="/products" className="text-sm font-bold text-blue-600 hover:text-blue-700 hover:underline flex items-center justify-center gap-1">
                                                 View Complete Catalog <ArrowRight size={14} />
                                             </Link>
                                         </div>
@@ -161,10 +118,62 @@ export default function Header() {
                             </AnimatePresence>
                         </div>
 
+                        {/* Socket Weld Fittings Dropdown */}
+                        <div
+                            className="relative group h-full"
+                            onMouseEnter={() => handleMouseEnter('socketweld')}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <button className={`flex items-center gap-1 ${textColorClass} font-bold tracking-wide text-sm uppercase py-4 group`}>
+                                Socket Weld Fittings <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === 'socketweld' ? 'rotate-180' : ''}`} />
+                            </button>
+                            <AnimatePresence>
+                                {activeDropdown === 'socketweld' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
+                                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                                        exit={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
+                                        transition={{ duration: 0.2 }}
+                                        className="absolute top-full -left-10 w-[600px] bg-white/95 backdrop-blur-xl shadow-2xl rounded-lg border border-gray-100 overflow-hidden grid grid-cols-2 p-6 pb-16 gap-x-8 gap-y-4"
+                                    >
+                                        <Link href="/products/stainless-steel-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Stainless Steel</Link>
+                                        <Link href="/products/carbon-steel-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Carbon Steel</Link>
+                                        <Link href="/products/alloy-steel-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Alloy Steel</Link>
+                                        <Link href="/products/duplex-steel-s31803-s32205-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Duplex Steel</Link>
+                                        <Link href="/products/super-duplex-steel-s32750-s32760-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Super Duplex Steel</Link>
+                                        <Link href="/products/nickel-alloy-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Nickel Alloys</Link>
+                                        <Link href="/products/inconel-alloy-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Inconel</Link>
+                                        <Link href="/products/monel-alloy-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Monel</Link>
+                                        <Link href="/products/hastelloy-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Hastelloy</Link>
+                                        <Link href="/products/titanium-alloy-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Titanium</Link>
+                                        <Link href="/products/cupro-nickel-socket-weld-fittings-manufacturer" className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Cupro Nickel</Link>
+
+                                        {/* Footer Link */}
+                                        <div className="absolute bottom-0 left-0 w-full bg-gray-50 border-t border-gray-100 p-3 text-center">
+                                            <Link href="/products" className="text-sm font-bold text-blue-600 hover:text-blue-700 hover:underline flex items-center justify-center gap-1">
+                                                View Complete Catalog <ArrowRight size={14} />
+                                            </Link>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        <Link href="/quality" className={`${textColorClass} font-bold tracking-wide text-sm uppercase transition-colors relative group py-2`}>
+                            Quality
+                            <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full`}></span>
+                        </Link>
+
+                        <Link href="/certificates" className={`${textColorClass} font-bold tracking-wide text-sm uppercase transition-colors relative group py-2`}>
+                            Certificates
+                            <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full`}></span>
+                        </Link>
+
                         <Link href="/blogs" className={`${textColorClass} font-bold tracking-wide text-sm uppercase transition-colors relative group py-2`}>
                             Blogs
                             <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full`}></span>
                         </Link>
+
                         <Link href="/contact-us" className={`${textColorClass} font-bold tracking-wide text-sm uppercase transition-colors relative group py-2`}>
                             Contact
                             <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full`}></span>
@@ -183,27 +192,38 @@ export default function Header() {
                         {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                     </button>
                 </div>
-            </div>
+            </div >
 
             {/* Mobile Menu */}
             <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: '100vh', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="lg:hidden fixed inset-0 top-[60px] bg-white z-40 overflow-y-auto"
-                    >
-                        <nav className="p-6 flex flex-col space-y-6 mt-10">
-                            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Home</Link>
-                            <Link href="/products" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Products</Link>
-                            <Link href="/about-us" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">About Us</Link>
-                            <Link href="/blogs" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Blogs</Link>
-                            <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-blue-600">Contact Us</Link>
-                        </nav>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </header>
+                {
+                    mobileMenuOpen && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: '100vh', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="lg:hidden fixed inset-0 top-[60px] bg-white z-40 overflow-y-auto"
+                        >
+                            <nav className="p-6 flex flex-col space-y-6 mt-10">
+                                <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Home</Link>
+                                <Link href="/about-us" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">About Us</Link>
+                                <div className="text-2xl font-bold text-gray-800">Threaded Fittings</div>
+                                <Link href="/products/stainless-steel-threaded-forged-fittings-manufacturer" onClick={() => setMobileMenuOpen(false)} className="text-lg text-gray-600 pl-4">Stainless Steel</Link>
+                                <Link href="/products/carbon-steel-threaded-forged-fittings-manufacturer" onClick={() => setMobileMenuOpen(false)} className="text-lg text-gray-600 pl-4">Carbon Steel</Link>
+
+                                <div className="text-2xl font-bold text-gray-800 mt-4">Socket Weld Fittings</div>
+                                <Link href="/products/stainless-steel-socket-weld-fittings-manufacturer" onClick={() => setMobileMenuOpen(false)} className="text-lg text-gray-600 pl-4">Stainless Steel</Link>
+                                <Link href="/products/carbon-steel-socket-weld-fittings-manufacturer" onClick={() => setMobileMenuOpen(false)} className="text-lg text-gray-600 pl-4">Carbon Steel</Link>
+
+                                <Link href="/quality" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800 mt-4">Quality</Link>
+                                <Link href="/certificates" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Certificates</Link>
+                                <Link href="/blogs" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Blogs</Link>
+                                <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-blue-600 mt-4">Contact Us</Link>
+                            </nav>
+                        </motion.div>
+                    )
+                }
+            </AnimatePresence >
+        </header >
     );
 }
