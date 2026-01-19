@@ -46,11 +46,53 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Metal Ministry Inc.",
+    "image": "https://metalministry.in/images/logo.png",
+    "url": "https://metalministry.in",
+    "telephone": "+91-9892171042",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "517, Prasad Chambers, Tata Road No. 2, Opera House",
+      "addressLocality": "Mumbai",
+      "postalCode": "400004",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 18.956223,
+      "longitude": 72.825325
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "19:00"
+    },
+    "sameAs": [
+      "https://www.facebook.com/metalministry",
+      "https://twitter.com/metalministry"
+    ]
+  };
+
   return (
     <html lang="en">
       <body
         className={`${outfit.variable} ${inter.variable} font-sans antialiased flex flex-col min-h-screen bg-white text-gray-900`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Header />
         <main className="flex-grow">
           {children}

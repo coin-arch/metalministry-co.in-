@@ -3,6 +3,12 @@ import Image from 'next/image';
 import { Quote } from 'lucide-react';
 import WhoWeAre from '@/components/home/WhoWeAre';
 import FeatureCards from '@/components/home/FeatureCards';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "About Us | Metal Ministry Inc.",
+    description: "Learn about Metal Ministry Inc., a premier exporter of engineering goods and metal products including Stainless Steel, Nickel Alloys, and more since 2000.",
+};
 
 export default function AboutUs() {
     return (
@@ -11,12 +17,7 @@ export default function AboutUs() {
             <section className="relative h-[300px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0">
                     <Image
-                        // src="/images/background/about-page-title-bg.jpg" // Using legacy image path if exists, otherwise Next/Image will error, handled safely usually or need fallback. 
-                        // Since I haven't verified if this specific bg exists, I'll use a safer robust path or a fallback pattern in real app.
-                        // For now, I'll try to use a generic one if this specific one is missing in my list.
-                        // Checking file list: I see 'background/about-page-title-bg.jpg' is NOT in the file list I saw earlier (only bg.jpg, bg2.png in /images).
-                        // I will use a placeholder/fallback to avoid broken image.
-                        src="/images/slider-1.jpg"
+                        src="/images/slider-1.jpg" // Fallback generic image
                         alt="About Us Banner"
                         fill
                         className="object-cover brightness-50"

@@ -8,8 +8,14 @@ import { ArrowRight, Globe, ShieldCheck, Users, Clock } from 'lucide-react';
 import WhoWeAre from '@/components/home/WhoWeAre';
 import FeatureCards from '@/components/home/FeatureCards';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
+import { Metadata } from 'next';
 
 import { getImageForProduct } from '@/lib/image-mapper';
+
+export const metadata: Metadata = {
+  title: "Stainless Steel Sheets, Plates & Coils Manufacturer | Metal Ministry Inc.",
+  description: "Leading manufacturer and exporter of Stainless Steel, Carbon Steel, and Nickel Alloy sheets, plates, and coils. ISO 9001:2015 Certified.",
+};
 
 const PRODUCTS = [
   {

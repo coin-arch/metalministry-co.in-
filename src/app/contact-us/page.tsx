@@ -1,6 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Contact Us | Metal Ministry Inc.",
+    description: "Get in touch with Metal Ministry Inc. for inquiries about Stainless Steel, Nickel Alloys, and Pipe Fittings. Located in Mumbai, India.",
+};
 
 export default function ContactUs() {
     return (

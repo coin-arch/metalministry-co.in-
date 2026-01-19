@@ -2,8 +2,15 @@
 
 import React, { useState } from 'react';
 import { ChevronRight, ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { Metadata } from 'next';
 
 import technicalData from '@/data/technical-data.json';
+
+export const metadata: Metadata = {
+    title: "Technical Data | Metal Ministry Inc.",
+    description: "Technical specifications, chemical compositions, and mechanical properties charts for Stainless Steel and Nickel Alloys.",
+};
 
 export default function TechnicalPage() {
     // Open first section by default
