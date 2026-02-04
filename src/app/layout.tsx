@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
   },
   icons: {
-    icon: '/images/logo1.png',
-    shortcut: '/images/logo1.png',
-    apple: '/images/logo1.png',
+    icon: '/images/logo.png',
+    shortcut: '/images/logo.png',
+    apple: '/images/logo.png',
   }
 };
 

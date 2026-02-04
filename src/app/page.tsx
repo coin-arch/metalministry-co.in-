@@ -1,4 +1,4 @@
-'use client';
+
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -9,6 +9,8 @@ import WhoWeAre from '@/components/home/WhoWeAre';
 import FeatureCards from '@/components/home/FeatureCards';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import { Metadata } from 'next';
+import ClientLogo from '@/components/ClientLogo';
+
 
 import { getImageForProduct } from '@/lib/image-mapper';
 
@@ -20,58 +22,58 @@ export const metadata: Metadata = {
 const PRODUCTS = [
   {
     title: "Stainless Steel Sheets",
-    desc: "304, 304L, 316, 316L, 310, 321, 904L. Premium Finish.",
-    slug: "stainless-steel-sheets-plates-manufacturer-stockist",
-    link: "/products/stainless-steel-sheets-plates-manufacturer-stockist",
+    desc: "304, 304L, 316, 316L. Premium Finish.",
+    slug: "stainless-steel-304-sheet-plates-manufacturer-exporter",
+    link: "/products/stainless-steel-304-sheet-plates-manufacturer-exporter",
     size: "large" // 2x2
   },
   {
     title: "Strips & Coils",
-    desc: "Precision Slit Coils in Stainless, Carbon & Alloys. Custom Widths.",
-    slug: "strips-coils-manufacturer-stockist",
-    link: "/products/strips-coils-manufacturer-stockist",
+    desc: "Precision Slit Coils in Stainless & Carbon. Custom Widths.",
+    slug: "stainless-steel-304-coils-manufacturer-exporter",
+    link: "/products/stainless-steel-304-coils-manufacturer-exporter",
     size: "tall" // 1x2
   },
   {
-    title: "Perforated Sheets",
-    desc: "Round, Square, Hexagonal Holes. For Industrial Filtration.",
-    slug: "perforated-sheets-manufacturer-stockist",
-    link: "/products/perforated-sheets-manufacturer-stockist",
+    title: "Industrial Flanges", // Replaced Perforated
+    desc: "Slip-on, Blind, Weld Neck. ANSI/ASME Standards.",
+    slug: "stainless-steel-17-4ph-flange-manufacturer-exporter",
+    link: "/products/stainless-steel-17-4ph-flange-manufacturer-exporter",
     size: "standard"
   },
   {
-    title: "Chequered Plates",
-    desc: "Anti-skid Flooring Plates. Diamond Pattern.",
-    slug: "stainless-steel-chequered-plates-manufacturer-stockist",
-    link: "/products/stainless-steel-chequered-plates-manufacturer-stockist",
+    title: "Aluminium Plates", // Replaced Chequered
+    desc: "2014, 2024, 7075. Aerospace & Industrial Grades.",
+    slug: "aluminium-alloy-2024-sheet-plates-manufacturer-exporter",
+    link: "/products/aluminium-alloy-2024-sheet-plates-manufacturer-exporter",
     size: "standard"
   },
   {
     title: "Duplex Steel Plates",
     desc: "UNS S31803, S32205. High Strength & Corrosion Resistance.",
-    slug: "duplex-steel-sheets-plates-manufacturer-stockist",
-    link: "/products/duplex-steel-sheets-plates-manufacturer-stockist",
+    slug: "duplex-s31803-s32205-sheet-plates-manufacturer-exporter",
+    link: "/products/duplex-s31803-s32205-sheet-plates-manufacturer-exporter",
     size: "wide" // 2x1
   },
   {
     title: "High Nickel Alloys",
     desc: "Monel, Inconel, Hastelloy Sheets & Plates.",
-    slug: "nickel-alloy-sheets-plates-manufacturer-stockist",
-    link: "/products/nickel-alloy-sheets-plates-manufacturer-stockist",
+    slug: "alloy-20-sheet-plates-manufacturer-exporter",
+    link: "/products/alloy-20-sheet-plates-manufacturer-exporter",
     size: "wide"
   },
   {
-    title: "17-4PH Sheets",
-    desc: "High Strength, Precipitation Hardening Stainless Steel.",
-    slug: "stainless-steel-17-4ph-sheets-plates-manufacturer-stockist",
-    link: "/products/stainless-steel-17-4ph-sheets-plates-manufacturer-stockist",
+    title: "Blind Flanges", // Replaced 17-4PH Sheets
+    desc: "High Pressure Blind Flanges in all grades.",
+    slug: "stainless-steel-17-4ph-blind-flange-manufacturer-exporter",
+    link: "/products/stainless-steel-17-4ph-blind-flange-manufacturer-exporter",
     size: "wide"
   },
   {
     title: "Super Duplex Plates",
     desc: "S32750 / S32760. Extreme Corrosion Resistance.",
-    slug: "super-duplex-steel-sheets-plates-manufacturer-stockist",
-    link: "/products/super-duplex-steel-sheets-plates-manufacturer-stockist",
+    slug: "super-duplex-s32750-s32760-sheet-plates-manufacturer-exporter",
+    link: "/products/super-duplex-s32750-s32760-sheet-plates-manufacturer-exporter",
     size: "wide"
   }
 ];
@@ -120,7 +122,6 @@ export default function Home() {
                     src={getImageForProduct(product.slug)}
                     alt={product.title}
                     fill
-                    quality={95}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-1000 scale-100 group-hover:scale-105"
                   />
@@ -177,46 +178,7 @@ export default function Home() {
       <WhyChooseUs />
 
 
-      {/* 5. Clients Section */}
-      <section className="py-24 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800">
-        <div className="container mx-auto px-4 mb-16 text-center">
-          <span className="text-blue-600 font-bold tracking-widest text-sm uppercase">Trust & Partnership</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mt-3 mb-6">Some Honorable Clients</h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full" />
-          <p className="text-gray-500 mt-6 max-w-2xl mx-auto">
-            We are proud to serve industry leaders across the globe. Our commitment to quality has earned us the trust of prestigious organizations.
-          </p>
-        </div>
 
-        <div className="container mx-auto px-4">
-          <Marquee speed={10} className="py-4">
-            {/* Manually listed based on user request - using placeholders if specific files dont exist, but trying to map to what we have */}
-            {[
-              { name: 'Valvitalia', img: '/images/clients/factory-1.png' },
-              { name: 'Tata Steel', img: '/images/clients/factory-2.png' },
-              { name: 'Ulma', img: '/images/clients/factory-3.png' },
-              { name: 'Erne Fittings', img: '/images/clients/factory-4.png' },
-              { name: 'US Steel', img: '/images/clients/factory-5.png' },
-              { name: 'Client 6', img: '/images/partner01.png' },
-              { name: 'Client 7', img: '/images/partner02.png' },
-              { name: 'Client 8', img: '/images/partner03.png' },
-            ].map((client, idx) => (
-              <div key={idx} className="relative w-32 h-20 md:w-44 md:h-24 mx-8 hover:scale-110 transition-transform duration-300">
-                <Image
-                  src={client.img}
-                  alt={client.name}
-                  fill
-                  className="object-contain" // Removed grayscale class
-                  onError={(e) => {
-                    // Fallback to text if image fails
-                    // (e.target as HTMLImageElement).style.display = 'none';
-                  }}
-                />
-              </div>
-            ))}
-          </Marquee>
-        </div>
-      </section>
 
 
 

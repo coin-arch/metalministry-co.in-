@@ -29,6 +29,26 @@ export default function Header() {
     const textColorClass = isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-blue-600';
     const logoClass = isTransparent ? 'brightness-0 invert drop-shadow-md' : '';
 
+    // Grouping Configuration for Mega Menu
+    const PRODUCT_GROUPS = [
+        {
+            title: "Piping & Fittings",
+            categories: ["Pipes", "Tubes", "Fittings", "Flanges"]
+        },
+        {
+            title: "Sheet & Plates",
+            categories: ["Sheet & Plates", "Coils", "Strips"]
+        },
+        {
+            title: "Bars & Profiles",
+            categories: ["Bars", "Wire", "Angle Channel"]
+        },
+        {
+            title: "Fasteners & Anchors",
+            categories: ["Fasteners", "Refactory Anchors"]
+        }
+    ];
+
     return (
         <header
             className={`z-50 transition-all duration-300 border-b 
@@ -61,14 +81,14 @@ export default function Header() {
                     <Link href="/" className="flex-shrink-0 relative group z-50">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/images/icons/logo-icon.png"
+                            src="/images/logo.png"
                             alt="Metal Ministry Inc. Logo"
                             className={`h-16 md:h-20 w-auto object-contain transition-all duration-500 ${logoClass}`}
                         />
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex gap-6 items-center">
+                    <nav className="hidden lg:flex gap-8 items-center">
                         <Link href="/" className={`${textColorClass} font-bold tracking-wide text-sm uppercase transition-colors relative group py-2`}>
                             Home
                             <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full`}></span>
@@ -78,46 +98,54 @@ export default function Header() {
                             <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full`}></span>
                         </Link>
 
-                        {/* Dynamic Categories */}
-                        {navData.map((category) => (
-                            <div
-                                key={category.label}
-                                className="relative group h-full"
-                                onMouseEnter={() => handleMouseEnter(category.label)}
-                                onMouseLeave={handleMouseLeave}
-                            >
-                                <button className={`flex items-center gap-1 ${textColorClass} font-bold tracking-wide text-sm uppercase py-4 group`}>
-                                    {category.label} <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === category.label ? 'rotate-180' : ''}`} />
-                                </button>
-                                <AnimatePresence>
-                                    {activeDropdown === category.label && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
-                                            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                                            exit={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
-                                            transition={{ duration: 0.2 }}
-                                            className="absolute top-full -left-10 w-[300px] bg-white/95 backdrop-blur-xl shadow-2xl rounded-lg border border-gray-100 overflow-hidden flex flex-col p-4"
-                                        >
-                                            <div className="max-h-[60vh] overflow-y-auto custom-scrollbar flex flex-col gap-2">
-                                                {category.items.length > 0 ? (
-                                                    category.items.map((item) => (
-                                                        <Link
-                                                            key={item.href}
-                                                            href={item.href}
-                                                            className="text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-md transition-all"
-                                                        >
-                                                            {item.label}
-                                                        </Link>
-                                                    ))
-                                                ) : (
-                                                    <span className="text-gray-400 text-xs p-2">Coming Soon</span>
-                                                )}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        ))}
+                        {/* Mega Menu Trigger */}
+                        <div
+                            className="relative group h-full"
+                            onMouseEnter={() => handleMouseEnter('products')}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <button className={`flex items-center gap-1 ${textColorClass} font-bold tracking-wide text-sm uppercase py-4 group`}>
+                                Products <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === 'products' ? 'rotate-180' : ''}`} />
+                            </button>
+                            <AnimatePresence>
+                                {activeDropdown === 'products' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
+                                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                                        exit={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
+                                        transition={{ duration: 0.2 }}
+                                        className="absolute top-full -left-[300px] w-[900px] max-w-[90vw] bg-white/95 backdrop-blur-xl shadow-2xl rounded-lg border border-gray-100 overflow-hidden p-8"
+                                    >
+                                        <div className="grid grid-cols-4 gap-8">
+                                            {PRODUCT_GROUPS.map((group) => (
+                                                <div key={group.title}>
+                                                    <h4 className="text-blue-600 font-bold uppercase tracking-wider text-xs mb-4 border-b border-gray-100 pb-2">
+                                                        {group.title}
+                                                    </h4>
+                                                    <ul className="space-y-2">
+                                                        {group.categories.map((cat) => (
+                                                            <li key={cat}>
+                                                                <Link
+                                                                    href={`/products?q=${encodeURIComponent(cat)}`}
+                                                                    className="text-gray-600 hover:text-blue-600 font-medium text-sm block py-1 hover:translate-x-1 transition-transform"
+                                                                >
+                                                                    {cat}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="mt-8 pt-4 border-t border-gray-100 text-center">
+                                            <Link href="/products" className="text-blue-600 font-bold text-sm tracking-wide hover:underline flex items-center justify-center gap-1">
+                                                View Full Catalog <ArrowRight size={14} />
+                                            </Link>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
 
                         <Link href="/technical" className={`${textColorClass} font-bold tracking-wide text-sm uppercase transition-colors relative group py-2`}>
                             Technical
@@ -163,25 +191,26 @@ export default function Header() {
                                 <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Home</Link>
                                 <Link href="/about-us" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">About Us</Link>
 
-                                {/* Dynamic Mobile Links */}
-                                {navData.map((category) => (
-                                    <div key={category.label}>
-                                        <div className="text-2xl font-bold text-gray-800 mb-2">{category.label}</div>
-                                        <div className="flex flex-col gap-2 pl-4 border-l-2 border-gray-100">
-                                            {category.items.map((item) => (
+                                <div className="text-2xl font-bold text-gray-800 border-b pb-2">Products</div>
+                                {PRODUCT_GROUPS.map((group) => (
+                                    <div key={group.title} className="pl-4">
+                                        <div className="text-lg font-bold text-gray-400 mb-2 uppercase tracking-wide text-xs">{group.title}</div>
+                                        <div className="flex flex-col gap-3 pl-2 border-l-2 border-gray-100">
+                                            {group.categories.map((cat) => (
                                                 <Link
-                                                    key={item.href}
-                                                    href={item.href}
+                                                    key={cat}
+                                                    href={`/products?q=${encodeURIComponent(cat)}`}
                                                     onClick={() => setMobileMenuOpen(false)}
                                                     className="text-lg text-gray-600 hover:text-blue-600"
                                                 >
-                                                    {item.label}
+                                                    {cat}
                                                 </Link>
                                             ))}
                                         </div>
                                     </div>
                                 ))}
 
+                                <Link href="/technical" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Technical</Link>
                                 <Link href="/certificates" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Certificates</Link>
                                 <Link href="/blogs" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-gray-800">Blogs</Link>
                                 <Link href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-blue-600 mt-4">Contact Us</Link>

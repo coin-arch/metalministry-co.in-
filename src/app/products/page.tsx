@@ -22,7 +22,6 @@ export default async function ProductsIndexPage() {
             .eq('company_id', process.env.NEXT_PUBLIC_COMPANY_ID!)
             .eq('type', 'product')
             .not('slug', 'eq', 'about-us') // Explicitly exclude About Us
-            .not('title', 'ilike', '%Pipes%') // Exclude Pipes if they are polluting
             .order('title', { ascending: true });
 
         posts = result.data;
@@ -48,27 +47,40 @@ export default async function ProductsIndexPage() {
                 {/* Client Component with Search & Filter - Passing Cleaned Data */}
                 {posts && (() => {
                     // SERVER-SIDE CLEANUP
-                    // 1. Deduplicate by slug
-                    const uniquePosts = Array.from(new Map(posts.map(item => [item.slug, item])).values());
+                    // 1. Deduplicate by slug AND Normalized Title
+                    const seenSlugs = new Set();
+                    const seenTitles = new Set();
 
-                    // 2. Strict Filter
-                    const cleanPosts = uniquePosts.filter(p => {
+                    const cleanPosts = posts.filter(p => {
+                        // 1. Basic Filters from before
+                        if (p.slug === 'about-us') return false;
                         const title = p.title.toLowerCase();
                         const slug = p.slug.toLowerCase();
 
-                        // Exclude Non-Product Pages that might be in the database as 'products' or 'posts'
                         const nonProducts = ['about us', 'contact', 'disclaimer', 'quality', 'privacy', 'sitemap', 'terms'];
-                        if (nonProducts.some(term => title.toLowerCase().includes(term) || slug.includes(term))) return false;
+                        if (nonProducts.some(term => title.includes(term) || slug.includes(term))) return false;
 
-
-                        // Exclude Non-Forged Fittings (e.g. Pipes, if accidentally mixed)
-                        if (title.includes('pipe') || title.includes('tube')) return false;
-
-                        // Exclude Location-Based SEO Spam (Duplicates)
-                        // Using .includes() to catch suffixes like '-uae', '-uaer', '-oman', etc. anywhere in the slug
+                        // Exclude Location-Based SEO Spam
                         const spamSuffixes = ['-uae', '-oman', '-qatar', '-kuwait', '-saudi', '-bahrain', 'saudi arabia'];
-                        if (spamSuffixes.some(suffix => slug.includes(suffix) || title.toLowerCase().includes(suffix))) return false;
+                        if (spamSuffixes.some(suffix => slug.includes(suffix) || title.includes(suffix))) return false;
 
+                        // 2. Strict Deduplication
+                        // Slug Check
+                        if (seenSlugs.has(slug)) return false;
+
+                        // Title Normalization (remove manufacturer, stockist, exporter, etc.)
+                        const normTitle = title
+                            .replace(/sheets/g, 'sheet').replace(/plates/g, 'plate')
+                            .replace(/bars/g, 'bar').replace(/rods/g, 'bar')
+                            .replace(/stockist/g, '').replace(/manufacturer/g, '')
+                            .replace(/exporter/g, '').replace(/supplier/g, '')
+                            .replace(/distributor/g, '').replace(/dealer/g, '')
+                            .trim();
+
+                        if (seenTitles.has(normTitle)) return false; // Duplicate underlying product
+
+                        seenSlugs.add(slug);
+                        seenTitles.add(normTitle);
                         return true;
                     });
 

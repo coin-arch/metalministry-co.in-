@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^nickelalloyflanges.com/ [NC]
+RewriteRule ^(.*)$ http://www.nickelalloyflanges.com/$1 [L,R=301]   
+
+

@@ -66,12 +66,12 @@ export default function Footer() {
                     <div>
                         <h4 className="text-white font-bold text-lg mb-6">Sheets & Plates</h4>
                         <ul className="space-y-4">
-                            <li><FooterLink href="/products/stainless-steel-sheets-plates-manufacturer-stockist">Stainless Steel Sheets</FooterLink></li>
-                            <li><FooterLink href="/products/strips-coils-manufacturer-stockist">Strips & Coils</FooterLink></li>
-                            <li><FooterLink href="/products/perforated-sheets-manufacturer-stockist">Perforated Sheets</FooterLink></li>
-                            <li><FooterLink href="/products/stainless-steel-chequered-plates-manufacturer-stockist">Chequered Plates</FooterLink></li>
-                            <li><FooterLink href="/products/duplex-steel-sheets-plates-manufacturer-stockist">Duplex Steel Plates</FooterLink></li>
-                            <li><FooterLink href="/products/nickel-alloy-sheets-plates-manufacturer-stockist">Nickel Alloy Plates</FooterLink></li>
+                            <li><FooterLink href="/products/stainless-steel-304-sheet-plates-manufacturer-exporter">Stainless Steel Sheets</FooterLink></li>
+                            <li><FooterLink href="/products/stainless-steel-304-coils-manufacturer-exporter">Strips & Coils</FooterLink></li>
+                            <li><FooterLink href="/products/stainless-steel-17-4ph-flange-manufacturer-exporter">Industrial Flanges</FooterLink></li>
+                            <li><FooterLink href="/products/aluminium-alloy-2024-sheet-plates-manufacturer-exporter">Aluminium Plates</FooterLink></li>
+                            <li><FooterLink href="/products/duplex-s31803-s32205-sheet-plates-manufacturer-exporter">Duplex Steel Plates</FooterLink></li>
+                            <li><FooterLink href="/products/alloy-20-sheet-plates-manufacturer-exporter">Nickel Alloy Plates</FooterLink></li>
                         </ul>
                     </div>
 

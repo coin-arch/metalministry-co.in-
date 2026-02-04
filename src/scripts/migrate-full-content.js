@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
 const cheerio = require('cheerio');
-const glob = require('glob');
 
 // --- SETUP ---
 const rootEnvPath = path.resolve(__dirname, '../../.env');
@@ -14,9 +13,10 @@ dotenv.config({ path: rootEnvPath });
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, supabaseKey);
 const COMPANY_ID = process.env.NEXT_PUBLIC_COMPANY_ID;
-const PUBLIC_HTML_DIR = path.resolve(__dirname, '../../public_html');
+// Update this path to match your project structure
+const PUBLIC_HTML_DIR = path.resolve(__dirname, '../../_legacy_content/main_site/public_html');
 
-// --- PARSING LOGIC (Adapted from parse-content.js) ---
+// --- PARSING LOGIC ---
 
 function cleanText(text) {
     if (!text) return '';
@@ -99,8 +99,8 @@ function parseNodes($, container) {
         else if (tag === 'table') {
             blocks.push(parseTable($, $el));
         }
-        // 6. DIVS
-        else if (tag === 'div') {
+        // 6. DIVS & WRAPPERS
+        else if (tag === 'div' || tag === 'article' || tag === 'section' || tag === 'center') {
             if ($el.hasClass('table-responsive')) {
                 const $table = $el.find('table');
                 if ($table.length) blocks.push(parseTable($, $table));
@@ -124,18 +124,8 @@ function parseNodes($, container) {
                 });
             }
             else {
-                // Recurse generic divs
+                // Recurse genric wrappers
                 blocks.push(...parseNodes($, $el));
-            }
-        }
-        else if (tag === 'center') {
-            blocks.push(...parseNodes($, $el));
-        }
-
-        // Custom Handling for 'bold-text' div sometimes used in legacy
-        if ($el.hasClass('bold-text') || $el.hasClass('text')) {
-            if (blocks.length === 0 && tag === 'div') {
-                // If we recursed we might have got it, otherwise treat as simple text
             }
         }
     });
@@ -143,101 +133,125 @@ function parseNodes($, container) {
     return blocks;
 }
 
+// --- HELPER to fetch all rows handling pagination ---
+async function fetchAllProducts() {
+    let allPosts = [];
+    let from = 0;
+    const batchSize = 1000;
+    let more = true;
+
+    while (more) {
+        const { data, error } = await supabase
+            .from('post')
+            .select('id, slug, title')
+            .eq('company_id', COMPANY_ID)
+            .eq('type', 'product')
+            .range(from, from + batchSize - 1);
+
+        if (error) {
+            console.error('Error fetching posts:', error);
+            break;
+        }
+
+        if (data.length > 0) {
+            allPosts = allPosts.concat(data);
+            from += batchSize;
+        }
+
+        if (data.length < batchSize) {
+            more = false;
+        }
+    }
+    return allPosts;
+}
 
 // --- MAIN EXECUTION ---
-
 async function migrateAll() {
-    console.log('--- Starting Full Content Migration ---');
+    console.log('--- Starting Fully Robust Content Migration ---');
 
-    // 0. Verify Total Count
-    const { count, error: countError } = await supabase
-        .from('post')
-        .select('*', { count: 'exact', head: true })
-        .eq('company_id', COMPANY_ID)
-        .eq('type', 'product');
-
-    if (countError) {
-        console.error('Error counting products:', countError);
-    } else {
-        console.log(`Total Products in DB: ${count}`);
-    }
-
-    // 1. Fetch all products
-    const { data: posts, error } = await supabase
-        .from('post')
-        .select('id, slug, title')
-        .eq('company_id', COMPANY_ID)
-        .eq('type', 'product')
-        .limit(1000); // Ensure we get everything
-
-    if (error) {
-        console.error('Error fetching posts:', error);
-        return;
-    }
-
-    console.log(`Found ${posts.length} products to process in this batch.`);
+    const posts = await fetchAllProducts();
+    console.log(`Verified Total Products to Process: ${posts.length}`);
 
     let successCount = 0;
     let failCount = 0;
 
     for (const post of posts) {
-        // Find HTML file
-        let distinctFilename = `${post.slug}.html`;
-        let filePath = path.join(PUBLIC_HTML_DIR, distinctFilename);
+        // Map special slugs
+        let filename = `${post.slug}.html`;
+        if (post.slug === 'about') filename = 'about-us.html';
+        if (post.slug === 'contact') filename = 'contact-us.html';
+
+        let filePath = path.join(PUBLIC_HTML_DIR, filename);
 
         if (!fs.existsSync(filePath)) {
-            // Try standard fallback if strict slug filename doesn't exist
-            // e.g. some might mismatch slightly. For now skipping.
-            failCount++;
-            continue;
+            // Try fallback if mapped file doesn't exist
+            if (post.slug === 'about') filePath = path.join(PUBLIC_HTML_DIR, 'about.html');
+            if (post.slug === 'contact') filePath = path.join(PUBLIC_HTML_DIR, 'contact.html');
+
+            if (!fs.existsSync(filePath)) {
+                // Try exact slug mismatch?
+                // console.warn(`[MISSING] ${filename}`);
+                failCount++;
+                continue;
+            }
         }
 
         try {
             const html = fs.readFileSync(filePath, 'utf8');
             const $ = cheerio.load(html);
 
-            // Target the content area
-            const container = $('.services-detail .inner-box .lower-content');
+            // Selectors Priority
+            let container = $('.blog-content');
+            if (!container.length) container = $('.article-blog');
+            if (!container.length) container = $('.contact-info-detail');
+            if (!container.length) container = $('.about-area');
+            if (!container.length) container = $('.services-detail .inner-box .lower-content');
+
+            // Layout based fallbacks
+            if (!container.length) container = $('.col-md-9');
+            if (!container.length) container = $('.col-sm-9');
+
+            // Last resort for About/Full-width
+            if (!container.length) container = $('.col-md-12');
 
             if (container.length === 0) {
+                console.warn(`[NO_CONTAINER] ${post.slug}`);
                 failCount++;
                 continue;
             }
 
-            // Parse using robust logic
+            // CLEANUP
+            container.find('.main-menu, .header-top-area, .header-middle-area, .footer-area, .breadcroumb-bg, .sidebar, .widget').remove();
+            container.find('script, style, iframe').remove();
+
             const blocks = parseNodes($, container);
 
             if (blocks.length > 0) {
                 const { error: updateError } = await supabase
                     .from('post')
-                    .update({
-                        structured_content: blocks
-                        // Removed 'status' field causing PGRST204 error
-                    })
+                    .update({ structured_content: blocks })
                     .eq('id', post.id);
 
                 if (updateError) {
-                    console.error(`Failed DB update for ${post.slug}:`, updateError);
+                    console.error(`[DB_FAIL] ${post.slug}:`, updateError.message);
                     failCount++;
                 } else {
                     successCount++;
+                    // stdout progress dot
+                    if (successCount % 50 === 0) process.stdout.write('.');
                 }
             } else {
-                console.warn(`No blocks parsed from ${post.slug}`);
+                console.warn(`[EMPTY_PARSE] ${post.slug}`);
                 failCount++;
             }
 
         } catch (err) {
-            console.error(`Error processing ${post.slug}:`, err.message);
+            console.error(`[EXCEPTION] ${post.slug}:`, err.message);
             failCount++;
-        }
-
-        if ((successCount + failCount) % 20 === 0) {
-            console.log(`Progress: ${successCount + failCount}/${posts.length}`);
         }
     }
 
-    console.log('--- Migration Complete ---');
+    console.log('\n--- Migration Complete ---');
     console.log(`Success: ${successCount}`);
     console.log(`Failed: ${failCount}`);
 }

@@ -9,30 +9,39 @@ import Image from 'next/image';
 const SLIDES = [
     {
         id: 1,
-        image: '/images/slider-1.jpg',
-        subtitle: 'Key Manufacturer',
-        title: 'Leading Manufacturer of Plates & Sheets',
-        description: 'Specialized in Stainless Steel, Carbon Steel, and Alloy Steel Plates. Available in all grades including 304, 316, 904L.',
-        cta: 'View Sheets & Plates',
-        link: '/products/stainless-steel-sheets-plates-manufacturer-stockist'
+        image: '/images/slide-img.jpg',
+        subtitle: 'Key Manufacturer & Exporter',
+        title: 'Stainless Steel Sheets, Plates & Coils',
+        description: 'Premium quality Stainless Steel, Carbon Steel, and Alloy Steel Plates. Available in all grades including 304, 304L, 316, 316L, 904L.',
+        cta: 'Explore Products',
+        link: '/products/stainless-steel-304-sheet-plates-manufacturer-exporter'
     },
     {
         id: 2,
-        image: '/images/slider-2.jpg',
+        image: '/images/slide-img2.jpg',
         subtitle: 'Global Stockist',
-        title: 'World\'s Largest Manufacturer of Strips & Coils',
-        description: 'Premium quality Strips & Coils available in various widths, thicknesses, and finishes for diverse industrial applications.',
-        cta: 'View Strips & Coils',
-        link: '/products/strips-coils-manufacturer-stockist'
+        title: 'High Nickel Alloys & Super Duplex Steel',
+        description: 'Specialized in Monel, Inconel, Hastelloy, and Super Duplex sheets and plates for critical industrial applications.',
+        cta: 'View Nickel Alloys',
+        link: '/products/alloy-20-sheet-plates-manufacturer-exporter'
     },
     {
         id: 3,
-        image: '/images/slider-3.jpg',
-        subtitle: 'Custom Solutions',
-        title: 'Premium Perforated Sheets & Chequered Plates',
-        description: 'High-quality Perforated Sheets for filtration and Chequered Plates for industrial flooring and safety.',
-        cta: 'View Perforated Sheets',
-        link: '/products/perforated-sheets-manufacturer-stockist'
+        image: '/images/slide-img3.jpg',
+        subtitle: 'Precision Engineering',
+        title: 'Industrial Flanges & 17-4PH',
+        description: 'Complete range of Slip-on, Blind, and Weld Neck Flanges. Specialized 17-4PH Components.',
+        cta: 'View Flanges',
+        link: '/products/stainless-steel-17-4ph-flange-manufacturer-exporter'
+    },
+    {
+        id: 4,
+        image: '/images/slide-img4.jpg',
+        subtitle: 'Industrial Solutions',
+        title: 'Aluminium Plates & Sheets',
+        description: 'High strength Aluminium Alloys (2014, 2024, 7075) for Aerospace and Marine applications.',
+        cta: 'View Aluminium',
+        link: '/products/aluminium-alloy-2024-sheet-plates-manufacturer-exporter'
     }
 ];
 

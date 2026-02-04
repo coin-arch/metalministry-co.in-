@@ -2,68 +2,30 @@
 export const FALLBACK_IMAGE = '/images/slider-hd-1.png';
 
 const SPECIFIC_MAPPINGS: Record<string, string> = {
-    // Homepage "Category" Slugs -> Specific Legacy Grade Images
-    'stainless-steel-sheets-plates-manufacturer-stockist': 'stainless-steel-304-304l-304h-sheets-plates-manufacturer-stockist.jpg',
-    'carbon-steel-sheets-plates-manufacturer-stockist': 'sheet-plates.jpg',
-    'duplex-steel-sheets-plates-manufacturer-stockist': 'duplex-f51-31803-f53-s32205-sheets-plates-manufacturer-stockist.jpg',
-    'nickel-alloy-sheets-plates-manufacturer-stockist': 'alloy-400-plate-stockist.jpg',
-    'titanium-sheets-plates-manufacturer-stockist': 'titanium-alloys-gr2-gr5-gr7-strips-sheets-plates-coils.jpg',
-    'strips-coils-manufacturer-stockist': 'strips-coils.jpg',
-    'perforated-sheets-manufacturer-stockist': 'perforated-sheets.jpg',
-    'stainless-steel-chequered-plates-manufacturer-stockist': 'chequered-plates.jpg',
-    'aluminium-sheets-plates-manufacturer-stockist': 'aluminium-alloy-5083-5086-6013-6061-perforated-sheets.jpg',
+    // Homepage "Category" Slugs -> Mapped to available Generic Images
+    'stainless-steel-304-sheet-plates-manufacturer-exporter': 'sheet-plates-manufacturer.jpg',
+    'stainless-steel-304-coils-manufacturer-exporter': 'coils-manufacturer.jpg',
+    'stainless-steel-17-4ph-flange-manufacturer-exporter': 'flanges-manufacturer.jpg',
+    'aluminium-alloy-2024-sheet-plates-manufacturer-exporter': 'aluminium-alloy-2024-sheet-plates-manufacturer-exporter.jpg',
+    'duplex-s31803-s32205-sheet-plates-manufacturer-exporter': 'sheet-plates-manufacturer.jpg',
+    'alloy-20-sheet-plates-manufacturer-exporter': 'sheet-plates-manufacturer.jpg',
+    'stainless-steel-17-4ph-blind-flange-manufacturer-exporter': 'blind-flanges-manufacturer.jpg',
+    'super-duplex-s32750-s32760-sheet-plates-manufacturer-exporter': 'sheet-plates-manufacturer.jpg',
 
-    // Legacy Fittings (Keep if needed or remove)
-    'stainless-steel-threaded-forged-fittings-manufacturer': 'stainless-steel-304-threaded-forged-fittings-supplier.jpg',
-    'carbon-steel-threaded-forged-fittings-manufacturer': 'carbon-steel-a105-threaded-forged-fittings-supplier.jpg',
-    'stainless-steel-socket-weld-fittings-manufacturer': 'stainless-steel-304-socketweld-fittings-supplier.jpg',
-    'alloy-steel-threaded-forged-fittings-manufacturer': 'alloy-steel-f11-threaded-forged-fittings-supplier.jpg',
-    'duplex-steel-s31803-s32205-threaded-forged-fittings-manufacturer': 'duplex-steel-s31803-s32205-threaded-forged-fittings-supplier.jpg',
-    'high-nickel-alloy-threaded-forged-fittings-manufacturer': 'inconel-alloy-625-threaded-forged-fittings-supplier.jpg',
-    'nickel-alloy-threaded-forged-fittings-manufacturer': 'nickel-alloy-200-threaded-forged-fittings-supplier.jpg',
+    // Additional verified mappings from nav data
+    'stainless-steel-310-310s-sheet-plates-manufacturer-exporter': 'sheet-plates.jpg',
+    'stainless-steel-316-316l-sheet-plates-manufacturer-exporter': 'sheet-plates.jpg',
+    'stainless-steel-317-sheet-plates-manufacturer-exporter': 'sheet-plates-manufacturer.jpg',
+    'stainless-steel-347-sheet-plates-manufacturer-exporter': 'sheet-plates.jpg',
+    'stainless-steel-410-sheet-plates-manufacturer-exporter': 'sheet-plates-manufacturer.jpg',
+    'aisi-430-sheet-plates-manufacturer-exporter': 'sheet-plates.jpg',
+    'stainless-steel-904l-sheet-plates-manufacturer-exporter': 'sheet-plates-manufacturer.jpg',
+    'carbon-steel-astm-a515-gr-60-plates-manufacturer-exporter': 'sheet-plates.jpg',
 
-    // Mappings for missing specific images (Fallbacks)
-    'titanium-alloy-grade-2-socketweld-fittings-supplier': '/images/products/titanium-alloy-socketweld-fittings-supplier.jpg',
-    'stainless-steel-316-316l-socketweld-fittings-supplier': '/images/products/stainless-steel-304-socketweld-fittings-supplier.jpg', // Fallback to 304
-    'hastelloy-socketweld-fittings-supplier': '/images/products/hastelloy-c276-socketweld-fittings-supplier.jpg', // Fallback to C276
-    'hastelloy-threaded-forged-fittings-supplier': '/images/products/hastelloy-c276-threaded-forged-fittings-supplier.jpg', // Fallback to C276
-    'inconel-alloy-socketweld-fittings-supplier': '/images/products/inconel-alloy-600-socketweld-fittings-supplier.jpg', // Fallback to 600
-    'inconel-alloy-threaded-forged-fittings-supplier': '/images/products/inconel-alloy-600-threaded-forged-fittings-supplier.jpg', // Fallback to 600
-    'monel-alloy-socketweld-fittings-supplier': '/images/products/monel-alloy-400-socketweld-fittings-supplier.jpg', // Fallback to 400
-    'monel-alloy-threaded-forged-fittings-supplier': '/images/products/monel-alloy-400-threaded-forged-fittings-supplier.jpg', // Fallback to 400
-
-    // Correct Mappings for "Stockist" Items (which have -manufacturer slugs)
-    'carbon-steel-socket-weld-fittings-manufacturer': '/images/products/carbon-steel-a105-socketweld-fittings-supplier.jpg', // Fallback to A105
-    'hastelloy-socket-weld-fittings-manufacturer': '/images/products/hastelloy-c276-socketweld-fittings-supplier.jpg',
-    'hastelloy-threaded-forged-fittings-manufacturer': '/images/products/hastelloy-c276-threaded-forged-fittings-supplier.jpg',
-    'inconel-alloy-825-socket-weld-fittings-manufacturer': '/images/products/inconel-alloy-825-sockeweld-fittings-supplier.jpg', // typo in file
-    'inconel-alloy-socket-weld-fittings-manufacturer': '/images/products/inconel-alloy-600-socketweld-fittings-supplier.jpg',
-    'inconel-alloy-threaded-forged-fittings-manufacturer': '/images/products/inconel-alloy-600-threaded-forged-fittings-supplier.jpg',
-    'monel-alloy-socket-weld-fittings-manufacturer': '/images/products/monel-alloy-400-socketweld-fittings-supplier.jpg',
-    'monel-alloy-threaded-forged-fittings-manufacturer': '/images/products/monel-alloy-400-threaded-forged-fittings-supplier.jpg',
-
-    // Stainless 316/316L/316TI Socket Weld Images are missing -> Fallback to 304
-    'stainless-steel-316-socket-weld-fittings-manufacturer': '/images/products/stainless-steel-304-socketweld-fittings-supplier.jpg',
-    'stainless-steel-316l-socket-weld-fittings-manufacturer': '/images/products/stainless-steel-304-socketweld-fittings-supplier.jpg',
-    'stainless-steel-316ti-socket-weld-fittings-manufacturer': '/images/products/stainless-steel-304-socketweld-fittings-supplier.jpg',
-
-    // Stainless 347 (Typo in file)
-    'stainless-steel-347-socket-weld-fittings-manufacturer': '/images/products/stainless-steel-347-sockeweld-fittings-supplier.jpg',
-
-    // Titanium Fallback
-    'titanium-alloy-grade-2-socket-weld-fittings-manufacturer': '/images/products/titanium-alloy-socketweld-fittings-supplier.jpg',
-
-    // Generic Nickel Alloy Mappings
-    'nickel-alloy-socket-weld-fittings-manufacturer': 'nickel-alloy-200-socketweld-fittings-supplier.jpg',
-    'titanium-alloy-threaded-forged-fittings-manufacturer': 'titanium-alloy-grade-2-threaded-forged-fittings-supplier.jpg',
-    'cupro-nickel-threaded-forged-fittings-manufacturer': 'cupro-nickel-90-10-threaded-forged-fittings-supplier.jpg',
-
-
-
+    // Legacy Mappings kept for reference/fallback
     // Specific Fixes for 15-5PH and Super Duplex (from User feedback)
-    'stainless-steel-15-5ph-perforated-sheets-manufacturer-stockist': 'stainless-steel-15-5ph-chequered-plates-manufacturer-stockist.jpg',
-    'super-duplex-steel-sheets-plates-manufacturer-stockist': 'super-duplex-steel-s32750-sheets-plates-manufacturer-stockist.jpg', // Mapped to S32750 explicitly
-    'super-duplex-steel-perforated-sheets-manufacturer-stockist': 'super-duplex-steel-2760-chequered-plates-manufacturer-stockist.jpg',
+    // Removed broken legacy mappings
+    'super-duplex-steel-s32750-s32760-sheet-plates-manufacturer-exporter': 'sheet-plates-manufacturer.jpg',
 };
 
 export function getImageForProduct(slug: string): string {
@@ -71,17 +33,118 @@ export function getImageForProduct(slug: string): string {
 
     // 1. Check explicit mapping first
     if (SPECIFIC_MAPPINGS[slug]) {
-        return `/images/${SPECIFIC_MAPPINGS[slug]}`;
+        const mapping = SPECIFIC_MAPPINGS[slug];
+        if (mapping.startsWith('/')) {
+            return mapping;
+        }
+        return `/images/${mapping}`;
     }
 
-    // 2. Try variations
-    const cleanSlug = slug.toLowerCase();
+    // 2. Keyword-based Fallbacks (Order matters for specificity)
+    const s = slug.toLowerCase();
 
-    // Priority 1: Check for exact match (most files seem to match the slug exactly now)
-    // Priority 2: Check for 'manufacturer' -> 'supplier' replacement (for legacy files)
+    // Fasteners
+    // Fasteners (Granular)
+    if (s.includes('bolt')) return '/images/bolts-manufacturer.jpg';
+    if (s.includes('nut')) return '/images/nuts-manufacturer.jpg';
+    if (s.includes('screw')) return '/images/screws-manufacturer.jpg';
+    if (s.includes('washer')) return '/images/washers-manufacturer.jpg';
+    if (s.includes('coated')) return '/images/ptee-coated-fasteners-manufacturer.jpg';
 
-    // Logic for returning the path string (Client-side we can't check existence easily)
-    // We will favor the EXACT slug match if it doesn't have the 'socket-weld' pattern (which works differently)
+    // Generic Fasteners
+    if (s.includes('fastener') || s.includes('stud')) {
+        return '/images/stainless-steel-fasteners-manufacturer.jpg';
+    }
 
-    return `/images/${cleanSlug}.jpg`;
+    // Angle & Channel
+    if (s.includes('angle') || s.includes('channel')) {
+        return '/images/angle-channel-manufacturer.jpg';
+    }
+
+    // Flanges (Specific types first)
+    if (s.includes('blind')) {
+        if (s.includes('spectacle')) return '/images/spectacle-blind-flanges-manufacturer.jpg';
+        return '/images/blind-flanges-manufacturer.jpg';
+    }
+    if (s.includes('slip')) return '/images/slip-on-flanges-manufacturer.jpg';
+    if (s.includes('weld neck') || s.includes('weld-neck') || s.includes('wnrf')) return '/images/weld-neck-flanges-manufacturer.jpg';
+    if (s.includes('socket')) return '/images/socket-weld-flanges-manufacturer.jpg';
+    if (s.includes('threaded')) return '/images/threaded-flanges-manufacturer.jpg';
+    if (s.includes('lap')) return '/images/lap-joint-flanges-manufacturer.jpg';
+    if (s.includes('orifice')) return '/images/orifice-flanges-manufacturer.jpg';
+
+    // Generic Flange
+    if (s.includes('flange')) {
+        return '/images/flanges-manufacturer.jpg';
+    }
+
+    // Fittings (Granular)
+    if (s.includes('butt')) return '/images/buttweld-fittings-manufacturer.jpg';
+    if (s.includes('socket')) return '/images/socketweld-fittings-manufacturer.jpg';
+    if (s.includes('threaded') || s.includes('screwed')) return '/images/threaded-forged-fittings-manufacturer.jpg';
+    if (s.includes('hydraulic')) return '/images/hydraulic-fittings-manufacturer.jpg';
+
+    // Shape-based Fallbacks (Assume Buttweld for major shapes, Threaded for smalls)
+    if (s.includes('elbow') || s.includes('tee') || s.includes('reducer') || s.includes('cap') || s.includes('stub') || s.includes('cross')) {
+        return '/images/buttweld-fittings-manufacturer.jpg';
+    }
+    if (s.includes('coupling') || s.includes('nipple') || s.includes('union') || s.includes('plug') || s.includes('bushing') || s.includes('boss') || s.includes('insert')) {
+        return '/images/threaded-forged-fittings-manufacturer.jpg';
+    }
+
+    // Generic Fittings (Catch-all)
+    if (s.includes('fitting')) {
+        return '/images/pipe-fittings-manufacturer.jpg';
+    }
+
+    // Tubes (Check before pipe if distinct, or after?)
+    if (s.includes('tube') || s.includes('tubing')) {
+        return '/images/tubes-manufacturer.jpg';
+    }
+
+    // Pipes (Check after fittings/flanges to avoid misclassification)
+    if (s.includes('pipe')) {
+        return '/images/pipes-manufacturer.jpg';
+    }
+
+    // Wire
+    if (s.includes('wire')) {
+        return '/images/wire-manufacturer.jpg';
+    }
+
+    // Coils
+    if (s.includes('coil')) {
+        return '/images/coils-manufacturer.jpg';
+    }
+
+    // Strips
+    if (s.includes('strip')) {
+        return '/images/strips-manufacturer.jpg';
+    }
+
+    // Bars (Granular checks first)
+    if (s.includes('hex')) return '/images/hex-bars-manufacturer.jpg';
+    if (s.includes('flat')) return '/images/flat-bars-manufacturer.jpg';
+    if (s.includes('square')) return '/images/square-bars-manufacturer.jpg';
+    if (s.includes('threaded')) return '/images/threaded-bars-manufacturer.jpg';
+    if (s.includes('bright')) return '/images/bright-bars-manufacturer.jpg';
+    if (s.includes('polished')) return '/images/polished-bars-manufacturer.jpg';
+    if (s.includes('rect')) return '/images/rectangular-bars-manufacturer.jpg';
+    // Generic Bar/Rod
+    if (s.includes('bar') || s.includes('rod')) {
+        return '/images/round-bars-manufacturer.jpg';
+    }
+
+    // Anchors
+    if (s.includes('anchor')) {
+        return '/images/refactory-y-anchors-manufacturer.jpg';
+    }
+
+    // Default for Sheets/Plates (Most common remaining category)
+    if (s.includes('sheet') || s.includes('plate') || s.includes('shim')) {
+        return '/images/sheet-plates-manufacturer.jpg';
+    }
+
+    // 3. Try exact match as last resort
+    return `/images/${s}.jpg`;
 }

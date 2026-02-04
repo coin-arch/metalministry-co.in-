@@ -6,6 +6,7 @@ import { ArrowRight, Search } from 'lucide-react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getImageForProduct } from '@/lib/image-mapper';
+import { useEffect } from 'react';
 
 type Product = {
     title: string;
@@ -13,12 +14,21 @@ type Product = {
     meta_description: string;
 };
 
+import { useSearchParams } from 'next/navigation';
+
 export default function ProductCatalog({ products }: { products: Product[] }) {
-    const [query, setQuery] = useState('');
+    const searchParams = useSearchParams();
+    const initialQuery = searchParams.get('q') || '';
+    const [query, setQuery] = useState(initialQuery);
+
+    // Sync state with URL if user clicks a different link
+    
+    useEffect(() => {
+        setQuery(searchParams.get('q') || '');
+    }, [searchParams]);
 
     const filteredProducts = products.filter(p =>
         p.slug !== 'about-us' && // Explicit client-side filter
-        !p.title.toLowerCase().includes('pipes') &&
         (p.title.toLowerCase().includes(query.toLowerCase()) ||
             p.meta_description?.toLowerCase().includes(query.toLowerCase()))
     );

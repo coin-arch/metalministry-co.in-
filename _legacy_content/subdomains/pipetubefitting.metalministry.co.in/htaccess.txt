@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^pipestubesfittings.com/ [NC]
+RewriteRule ^(.*)$ http://www.pipetubefitting.metalministry.co.in/$1 [L,R=301]   

@@ -38,7 +38,7 @@ if (missingVars.length > 0) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const PUBLIC_HTML_DIR = path.join(__dirname, '../../public_html');
+const PUBLIC_HTML_DIR = path.join(__dirname, '../../_legacy_content/main_site/public_html');
 const EXCLUDED_FILES = [
     'index.html',
     'contact-us.html',
