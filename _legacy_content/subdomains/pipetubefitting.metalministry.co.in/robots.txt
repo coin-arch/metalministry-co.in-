@@ -1,5 +1,0 @@
-User-agent: *
-
-allow: /maps/api/js/AuthenticationService.Authenticate
-
-allow:/maps/api/js/QuotaService.RecordEvent

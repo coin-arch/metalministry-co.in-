@@ -1,5 +1,4 @@
 
-
 import Link from 'next/link';
 import Image from 'next/image';
 import HeroSlider from '@/components/HeroSlider';
@@ -10,6 +9,7 @@ import FeatureCards from '@/components/home/FeatureCards';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import { Metadata } from 'next';
 import ClientLogo from '@/components/ClientLogo';
+import { MotionDiv, MotionSection } from '@/components/MotionWrapper';
 
 
 import { getImageForProduct } from '@/lib/image-mapper';
@@ -85,7 +85,14 @@ export default function Home() {
       <HeroSlider />
 
       {/* 2. Feature Cards (Services) */}
-      <FeatureCards />
+      <MotionSection
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <FeatureCards />
+      </MotionSection>
 
       {/* 3. Who We Are (Innovation Section) */}
       <WhoWeAre />
@@ -97,27 +104,39 @@ export default function Home() {
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-20">
+          <MotionDiv
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
             <span className="text-blue-600 font-bold uppercase tracking-widest text-sm block mb-4">Our Catalog</span>
             <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
               Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Engineered</span>
             </h2>
             <div className="w-32 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full" />
-          </div>
+          </MotionDiv>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[200px] gap-6">
             {PRODUCTS.map((product, idx) => (
-              <div
+              <MotionDiv
                 key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className={`group relative rounded-3xl overflow-hidden border border-white/20 shadow-xl bg-gray-900 
                   ${product.size === 'large' ? 'md:col-span-2 md:row-span-2' : ''}
                   ${product.size === 'wide' ? 'md:col-span-2' : ''}
                   ${product.size === 'tall' ? 'md:row-span-2' : ''}
-                  hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500
+                  hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 cursor-pointer
                 `}
               >
+                {/* Full Card Link */}
+                <Link href={product.link} className="absolute inset-0 z-20" aria-label={`View ${product.title}`} />
+
                 {/* Image */}
-                <div className="absolute inset-0 h-full w-full">
+                <div className="absolute inset-0 h-full w-full pointer-events-none">
                   <Image
                     src={getImageForProduct(product.slug)}
                     alt={product.title}
@@ -129,7 +148,7 @@ export default function Home() {
                 </div>
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full">
+                <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full pointer-events-none">
                   <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
                     {product.size === 'large' && (
                       <span className="bg-blue-600/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-4 inline-block shadow-lg">
@@ -147,39 +166,39 @@ export default function Home() {
                       <p className="text-gray-300 text-sm mb-6 leading-relaxed">
                         {product.desc}
                       </p>
-                      <Link
-                        href={product.link}
+                      <span
                         className="inline-flex items-center text-sm font-semibold text-white hover:text-blue-400 transition-colors"
                       >
                         Explore Product <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Link>
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 {/* Decorative Shine Effect */}
-                <div className="absolute top-0 right-0 -mt-10 -mr-10 w-24 h-24 bg-white/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              </div>
+                <div className="absolute top-0 right-0 -mt-10 -mr-10 w-24 h-24 bg-white/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              </MotionDiv>
             ))}
           </div>
 
-          <div className="text-center mt-20">
+          <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mt-20"
+          >
             <Link href="/products" className="group inline-flex items-center gap-3 px-10 py-5 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 font-bold tracking-wide shadow-xl hover:shadow-blue-600/30 border border-gray-200 dark:border-slate-700">
               View Complete Catalog
               <span className="bg-gray-100 dark:bg-slate-700 group-hover:bg-white/20 text-blue-600 group-hover:text-white rounded-full p-1 transition-colors">
                 <ArrowRight size={16} />
               </span>
             </Link>
-          </div>
+          </MotionDiv>
         </div>
       </section>
 
       {/* 5. Why Choose Us */}
       <WhyChooseUs />
-
-
-
-
 
 
       {/* 7. Contact CTA - Enhanced Redesign */}
@@ -201,7 +220,12 @@ export default function Home() {
         <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] animate-pulse delay-700" />
 
         <div className="container mx-auto px-4 relative z-10 text-center">
-          <div className="max-w-4xl mx-auto backdrop-blur-md bg-white/5 rounded-3xl p-8 md:p-14 border border-white/10 shadow-2xl relative overflow-hidden">
+          <MotionDiv
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto backdrop-blur-md bg-white/5 rounded-3xl p-8 md:p-14 border border-white/10 shadow-2xl relative overflow-hidden"
+          >
             {/* Glass Shine */}
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent opacity-50 pointer-events-none" />
 
@@ -238,7 +262,7 @@ export default function Home() {
               <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-blue-400 rounded-full" /> Global Delivery</span>
               <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-purple-400 rounded-full" /> ISO Certified</span>
             </div>
-          </div>
+          </MotionDiv>
         </div>
       </section>
 

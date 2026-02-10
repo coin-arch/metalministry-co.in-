@@ -1,3 +1,4 @@
+import React from 'react';
 import { createClient } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import Sidebar from '@/components/Sidebar';
@@ -161,7 +162,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                 </div>
 
                                 {categoryProducts.length > 0 ? (
-                                    <ProductCatalog products={categoryProducts} />
+                                    <React.Suspense fallback={<div className="animate-pulse h-64 bg-gray-100 rounded-xl"></div>}>
+                                        <ProductCatalog products={categoryProducts} />
+                                    </React.Suspense>
                                 ) : (
                                     <div className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-100 dark:border-yellow-900/20 p-6 rounded-xl text-center">
                                         <p className="text-yellow-700 dark:text-yellow-400 font-medium">No products currently listed in this category.</p>
@@ -248,7 +251,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                             <div className="mt-12 pt-8 border-t border-gray-100 dark:border-slate-800">
                                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Available Grades & Specifications</h2>
                                 {relatedProducts.length > 0 ? (
-                                    <ProductCatalog products={relatedProducts} />
+                                    <React.Suspense fallback={<div className="animate-pulse h-64 bg-gray-100 rounded-xl"></div>}>
+                                        <ProductCatalog products={relatedProducts} />
+                                    </React.Suspense>
                                 ) : (
                                     <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/20 p-6 rounded-xl">
                                         <p className="text-blue-700 dark:text-blue-300">Browse our complete range of {post.title} products above or contact us for custom sizing.</p>

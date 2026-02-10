@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase';
+import { Suspense } from 'react';
 import ProductCatalog from '@/components/ProductCatalog';
 
 // export const revalidate = 3600;
@@ -84,7 +85,11 @@ export default async function ProductsIndexPage() {
                         return true;
                     });
 
-                    return <ProductCatalog products={cleanPosts} />;
+                    return (
+                        <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">{[1, 2, 3].map(i => <div key={i} className="h-64 bg-gray-200 rounded-xl"></div>)}</div>}>
+                            <ProductCatalog products={cleanPosts} />
+                        </Suspense>
+                    );
                 })()}
             </div>
         </div>
